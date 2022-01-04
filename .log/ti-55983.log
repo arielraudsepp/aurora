@@ -1,0 +1,54 @@
+[19:12:44.628] Global cache location '/Users/ariel/Library/Caches/typescript/4.5', safe file path '/users/ariel/dev/my-app/node_modules/typescript/lib/typingsafelist.json', types map path /users/ariel/dev/my-app/node_modules/typescript/lib/typesmap.json
+[19:12:44.631] Processing cache location '/Users/ariel/Library/Caches/typescript/4.5'
+[19:12:44.631] Trying to find '/Users/ariel/Library/Caches/typescript/4.5/package.json'...
+[19:12:44.632] Finished processing cache location '/Users/ariel/Library/Caches/typescript/4.5'
+[19:12:44.632] Process id: 55984
+[19:12:44.632] NPM location: /opt/homebrew/Cellar/node/17.3.0/bin/npm (explicit '--npmLocation' not  provided)
+[19:12:44.632] validateDefaultNpmLocation: false
+[19:12:44.632] Npm config file: /Users/ariel/Library/Caches/typescript/4.5/package.json
+[19:12:44.633] Updating types-registry npm package...
+[19:12:44.633] Exec: /opt/homebrew/Cellar/node/17.3.0/bin/npm install --ignore-scripts types-registry@latest
+[19:12:44.640]     Failed. stdout:
+    stderr:
+    /bin/sh: /opt/homebrew/Cellar/node/17.3.0/bin/npm: No such file or directory
+    
+[19:12:44.640] Updated types-registry npm package
+[19:12:44.640] Types registry file '/Users/ariel/Library/Caches/typescript/4.5/node_modules/types-registry/index.json' does not exist
+[12:56:35.653] Got install request {"projectName":"/dev/null/inferredProject1*","fileNames":["/Users/ariel/dev/my-app/node_modules/typescript/lib/lib.es5.d.ts","/Users/ariel/dev/my-app/node_modules/typescript/lib/lib.es2015.d.ts","/Users/ariel/dev/my-app/node_modules/typescript/lib/lib.es2016.d.ts","/Users/ariel/dev/my-app/node_modules/typescript/lib/lib.dom.d.ts","/Users/ariel/dev/my-app/node_modules/typescript/lib/lib.dom.iterable.d.ts","/Users/ariel/dev/my-app/node_modules/typescript/lib/lib.webworker.importscripts.d.ts","/Users/ariel/dev/my-app/node_modules/typescript/lib/lib.scripthost.d.ts","/Users/ariel/dev/my-app/node_modules/typescript/lib/lib.es2015.core.d.ts","/Users/ariel/dev/my-app/node_modules/typescript/lib/lib.es2015.collection.d.ts","/Users/ariel/dev/my-app/node_modules/typescript/lib/lib.es2015.generator.d.ts","/Users/ariel/dev/my-app/node_modules/typescript/lib/lib.es2015.iterable.d.ts","/Users/ariel/dev/my-app/node_modules/typescript/lib/lib.es2015.promise.d.ts","/Users/ariel/dev/my-app/node_modules/typescript/lib/lib.es2015.proxy.d.ts","/Users/ariel/dev/my-app/node_modules/typescript/lib/lib.es2015.reflect.d.ts","/Users/ariel/dev/my-app/node_modules/typescript/lib/lib.es2015.symbol.d.ts","/Users/ariel/dev/my-app/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts","/Users/ariel/dev/my-app/node_modules/typescript/lib/lib.es2016.array.include.d.ts","/Users/ariel/dev/my-app/node_modules/typescript/lib/lib.es2016.full.d.ts","/Users/ariel/dev/my-app/node_modules/react-scripts/config/webpack.config.js"],"compilerOptions":{"module":1,"target":3,"jsx":1,"allowJs":true,"allowSyntheticDefaultImports":true,"allowNonTsExtensions":true,"noEmitForJsFiles":true,"maxNodeModuleJsDepth":2},"typeAcquisition":{"enable":true,"include":[],"exclude":[]},"unresolvedImports":["case-sensitive-paths-webpack-plugin","loader-utils","mini-css-extract-plugin","react-dev-utils","webpack-sources","workbox-webpack-plugin"],"projectRootPath":"/Users/ariel/dev/my-app/node_modules/react-scripts/config","kind":"discover"}
+[12:56:35.663] Loaded safelist from types map file '/users/ariel/dev/my-app/node_modules/typescript/lib/typesmap.json'
+[12:56:35.663] Explicitly included types: []
+[12:56:35.664] Inferred typings from unresolved imports: ["case-sensitive-paths-webpack-plugin","loader-utils","mini-css-extract-plugin","react-dev-utils","webpack-sources","workbox-webpack-plugin"]
+[12:56:35.664] Result: {"cachedTypingPaths":[],"newTypingNames":["case-sensitive-paths-webpack-plugin","loader-utils","mini-css-extract-plugin","react-dev-utils","webpack-sources","workbox-webpack-plugin"],"filesToWatch":["/Users/ariel/dev/my-app/node_modules/react-scripts/config/bower_components","/Users/ariel/dev/my-app/node_modules/react-scripts/config/node_modules"]}
+[12:56:35.664] Finished typings discovery: {"cachedTypingPaths":[],"newTypingNames":["case-sensitive-paths-webpack-plugin","loader-utils","mini-css-extract-plugin","react-dev-utils","webpack-sources","workbox-webpack-plugin"],"filesToWatch":["/Users/ariel/dev/my-app/node_modules/react-scripts/config/bower_components","/Users/ariel/dev/my-app/node_modules/react-scripts/config/node_modules"]}
+[12:56:35.664] DirectoryWatcher:: Added:: WatchInfo: /Users/ariel/dev/my-app/node_modules/react-scripts/config/bower_components
+[12:56:35.664] DirectoryWatcher:: Added:: WatchInfo: /Users/ariel/dev/my-app/node_modules/react-scripts/config/bower_components 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[12:56:35.665] Elapsed:: 0.4071669578552246ms DirectoryWatcher:: Added:: WatchInfo: /Users/ariel/dev/my-app/node_modules/react-scripts/config/bower_components 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[12:56:35.665] DirectoryWatcher:: Added:: WatchInfo: /Users/ariel/dev/my-app/node_modules/react-scripts/config/node_modules
+[12:56:35.665] DirectoryWatcher:: Added:: WatchInfo: /Users/ariel/dev/my-app/node_modules/react-scripts/config/node_modules 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[12:56:35.665] Elapsed:: 0.0419999361038208ms DirectoryWatcher:: Added:: WatchInfo: /Users/ariel/dev/my-app/node_modules/react-scripts/config/node_modules 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[12:56:35.665] Installing typings ["case-sensitive-paths-webpack-plugin","loader-utils","mini-css-extract-plugin","react-dev-utils","webpack-sources","workbox-webpack-plugin"]
+[12:56:35.665] 'case-sensitive-paths-webpack-plugin':: Entry for package 'case-sensitive-paths-webpack-plugin' does not exist in local types registry - skipping...
+[12:56:35.665] 'loader-utils':: Entry for package 'loader-utils' does not exist in local types registry - skipping...
+[12:56:35.665] 'mini-css-extract-plugin':: Entry for package 'mini-css-extract-plugin' does not exist in local types registry - skipping...
+[12:56:35.665] 'react-dev-utils':: Entry for package 'react-dev-utils' does not exist in local types registry - skipping...
+[12:56:35.666] 'webpack-sources':: Entry for package 'webpack-sources' does not exist in local types registry - skipping...
+[12:56:35.666] 'workbox-webpack-plugin':: Entry for package 'workbox-webpack-plugin' does not exist in local types registry - skipping...
+[12:56:35.666] All typings are known to be missing or invalid - no need to install more typings
+[12:56:35.666] Sending response:
+    {"projectName":"/dev/null/inferredProject1*","typeAcquisition":{"enable":true,"include":[],"exclude":[]},"compilerOptions":{"module":1,"target":3,"jsx":1,"allowJs":true,"allowSyntheticDefaultImports":true,"allowNonTsExtensions":true,"noEmitForJsFiles":true,"maxNodeModuleJsDepth":2},"typings":[],"unresolvedImports":["case-sensitive-paths-webpack-plugin","loader-utils","mini-css-extract-plugin","react-dev-utils","webpack-sources","workbox-webpack-plugin"],"kind":"action::set"}
+[12:56:35.666] Response has been sent.
+[14:06:46.835] Got install request {"projectName":"/dev/null/inferredProject2*","fileNames":[],"compilerOptions":{"module":1,"target":3,"jsx":1,"allowJs":true,"allowSyntheticDefaultImports":true,"allowNonTsExtensions":true,"noEmitForJsFiles":true},"typeAcquisition":{"enable":true,"include":[],"exclude":[]},"unresolvedImports":[],"projectRootPath":"/Users/ariel/dev/my-app/src","kind":"discover"}
+[14:06:46.837] Explicitly included types: []
+[14:06:46.838] Inferred typings from unresolved imports: []
+[14:06:46.838] Result: {"cachedTypingPaths":[],"newTypingNames":[],"filesToWatch":["/Users/ariel/dev/my-app/src/bower_components","/Users/ariel/dev/my-app/src/node_modules"]}
+[14:06:46.838] Finished typings discovery: {"cachedTypingPaths":[],"newTypingNames":[],"filesToWatch":["/Users/ariel/dev/my-app/src/bower_components","/Users/ariel/dev/my-app/src/node_modules"]}
+[14:06:46.839] DirectoryWatcher:: Added:: WatchInfo: /Users/ariel/dev/my-app/src/bower_components
+[14:06:46.839] DirectoryWatcher:: Added:: WatchInfo: /Users/ariel/dev/my-app/src/bower_components 1 undefined Project: /dev/null/inferredProject2* watcher already invoked: false
+[14:06:46.840] Elapsed:: 0.24791598320007324ms DirectoryWatcher:: Added:: WatchInfo: /Users/ariel/dev/my-app/src/bower_components 1 undefined Project: /dev/null/inferredProject2* watcher already invoked: false
+[14:06:46.840] DirectoryWatcher:: Added:: WatchInfo: /Users/ariel/dev/my-app/src/node_modules
+[14:06:46.840] DirectoryWatcher:: Added:: WatchInfo: /Users/ariel/dev/my-app/src/node_modules 1 undefined Project: /dev/null/inferredProject2* watcher already invoked: false
+[14:06:46.840] Elapsed:: 0.08370792865753174ms DirectoryWatcher:: Added:: WatchInfo: /Users/ariel/dev/my-app/src/node_modules 1 undefined Project: /dev/null/inferredProject2* watcher already invoked: false
+[14:06:46.841] Sending response:
+    {"projectName":"/dev/null/inferredProject2*","typeAcquisition":{"enable":true,"include":[],"exclude":[]},"compilerOptions":{"module":1,"target":3,"jsx":1,"allowJs":true,"allowSyntheticDefaultImports":true,"allowNonTsExtensions":true,"noEmitForJsFiles":true},"typings":[],"unresolvedImports":[],"kind":"action::set"}
+[14:06:46.841] Response has been sent.
+[14:06:46.841] No new typings were requested as a result of typings discovery
