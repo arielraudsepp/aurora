@@ -4,7 +4,7 @@ import { Button } from 'semantic-ui-react'
 interface ButtonProps {text: string,
                        onClick?: (_: any) => void; };
 
-const ButtonExampleButton = (name: ButtonProps) => {
+const UIButton = (name: ButtonProps) => {
   let {text, onClick} = name;
   return (
       <div>
@@ -13,4 +13,4 @@ const ButtonExampleButton = (name: ButtonProps) => {
   )
 }
 
-export default ButtonExampleButton
+export default UIButton
