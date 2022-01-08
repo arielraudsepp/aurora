@@ -1,0 +1,32 @@
+[16:52:33.788] Global cache location '/Users/ariel/Library/Caches/typescript/4.5', safe file path '/users/ariel/dev/my-app/node_modules/typescript/lib/typingsafelist.json', types map path /users/ariel/dev/my-app/node_modules/typescript/lib/typesmap.json
+[16:52:33.790] Processing cache location '/Users/ariel/Library/Caches/typescript/4.5'
+[16:52:33.790] Trying to find '/Users/ariel/Library/Caches/typescript/4.5/package.json'...
+[16:52:33.791] Finished processing cache location '/Users/ariel/Library/Caches/typescript/4.5'
+[16:52:33.791] Process id: 81464
+[16:52:33.791] NPM location: /opt/homebrew/Cellar/node/17.3.0/bin/npm (explicit '--npmLocation' not  provided)
+[16:52:33.791] validateDefaultNpmLocation: false
+[16:52:33.791] Npm config file: /Users/ariel/Library/Caches/typescript/4.5/package.json
+[16:52:33.792] Updating types-registry npm package...
+[16:52:33.792] Exec: /opt/homebrew/Cellar/node/17.3.0/bin/npm install --ignore-scripts types-registry@latest
+[16:52:33.800]     Failed. stdout:
+    stderr:
+    /bin/sh: /opt/homebrew/Cellar/node/17.3.0/bin/npm: No such file or directory
+    
+[16:52:33.800] Updated types-registry npm package
+[16:52:33.800] Types registry file '/Users/ariel/Library/Caches/typescript/4.5/node_modules/types-registry/index.json' does not exist
+[09:47:42.924] Got install request {"projectName":"/dev/null/inferredProject1*","fileNames":[],"compilerOptions":{"module":1,"target":3,"jsx":1,"allowJs":true,"allowSyntheticDefaultImports":true,"allowNonTsExtensions":true,"noEmitForJsFiles":true},"typeAcquisition":{"enable":true,"include":[],"exclude":[]},"unresolvedImports":[],"projectRootPath":"/Users/ariel/dev/my-app/src/components","kind":"discover"}
+[09:47:42.948] Loaded safelist from types map file '/users/ariel/dev/my-app/node_modules/typescript/lib/typesmap.json'
+[09:47:42.949] Explicitly included types: []
+[09:47:42.950] Inferred typings from unresolved imports: []
+[09:47:42.950] Result: {"cachedTypingPaths":[],"newTypingNames":[],"filesToWatch":["/Users/ariel/dev/my-app/src/components/bower_components","/Users/ariel/dev/my-app/src/components/node_modules"]}
+[09:47:42.950] Finished typings discovery: {"cachedTypingPaths":[],"newTypingNames":[],"filesToWatch":["/Users/ariel/dev/my-app/src/components/bower_components","/Users/ariel/dev/my-app/src/components/node_modules"]}
+[09:47:42.950] DirectoryWatcher:: Added:: WatchInfo: /Users/ariel/dev/my-app/src/components/bower_components
+[09:47:42.951] DirectoryWatcher:: Added:: WatchInfo: /Users/ariel/dev/my-app/src/components/bower_components 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[09:47:42.952] Elapsed:: 0.7807919979095459ms DirectoryWatcher:: Added:: WatchInfo: /Users/ariel/dev/my-app/src/components/bower_components 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[09:47:42.952] DirectoryWatcher:: Added:: WatchInfo: /Users/ariel/dev/my-app/src/components/node_modules
+[09:47:42.952] DirectoryWatcher:: Added:: WatchInfo: /Users/ariel/dev/my-app/src/components/node_modules 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[09:47:42.952] Elapsed:: 0.07674992084503174ms DirectoryWatcher:: Added:: WatchInfo: /Users/ariel/dev/my-app/src/components/node_modules 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[09:47:42.952] Sending response:
+    {"projectName":"/dev/null/inferredProject1*","typeAcquisition":{"enable":true,"include":[],"exclude":[]},"compilerOptions":{"module":1,"target":3,"jsx":1,"allowJs":true,"allowSyntheticDefaultImports":true,"allowNonTsExtensions":true,"noEmitForJsFiles":true},"typings":[],"unresolvedImports":[],"kind":"action::set"}
+[09:47:42.953] Response has been sent.
+[09:47:42.953] No new typings were requested as a result of typings discovery

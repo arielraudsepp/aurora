@@ -8,7 +8,7 @@ const UIButton = (name: ButtonProps) => {
   let {text, onClick} = name;
   return (
       <div>
-          <Button onClick={onClick}>{text}</Button>
+          <button className='ui primary button' onClick={onClick}>{text}</button>
       </div>
   )
 }

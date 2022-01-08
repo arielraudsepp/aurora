@@ -1,0 +1,16 @@
+[10:12:07.591] Global cache location '/Users/ariel/Library/Caches/typescript/4.5', safe file path '/users/ariel/dev/my-app/node_modules/typescript/lib/typingsafelist.json', types map path /users/ariel/dev/my-app/node_modules/typescript/lib/typesmap.json
+[10:12:07.592] Processing cache location '/Users/ariel/Library/Caches/typescript/4.5'
+[10:12:07.593] Trying to find '/Users/ariel/Library/Caches/typescript/4.5/package.json'...
+[10:12:07.593] Finished processing cache location '/Users/ariel/Library/Caches/typescript/4.5'
+[10:12:07.593] Process id: 85393
+[10:12:07.593] NPM location: /opt/homebrew/Cellar/node/17.3.0/bin/npm (explicit '--npmLocation' not  provided)
+[10:12:07.593] validateDefaultNpmLocation: false
+[10:12:07.595] Npm config file: /Users/ariel/Library/Caches/typescript/4.5/package.json
+[10:12:07.595] Updating types-registry npm package...
+[10:12:07.595] Exec: /opt/homebrew/Cellar/node/17.3.0/bin/npm install --ignore-scripts types-registry@latest
+[10:12:07.608]     Failed. stdout:
+    stderr:
+    /bin/sh: /opt/homebrew/Cellar/node/17.3.0/bin/npm: No such file or directory
+    
+[10:12:07.608] Updated types-registry npm package
+[10:12:07.608] Types registry file '/Users/ariel/Library/Caches/typescript/4.5/node_modules/types-registry/index.json' does not exist

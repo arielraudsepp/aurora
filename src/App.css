@@ -1,5 +1,7 @@
 .App {
   text-align: left;
+  padding-left: 10px;
+  padding-bottom: 20px;
 }
 
 .App-logo {
@@ -7,12 +9,16 @@
   pointer-events: none;
 }
 
-
 p {
   margin: 0;
 }
+
+h3 {
+  padding-bottom: 20;
+}
+
 .App-header {
-  background-color: #282c34;
+  background-color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -23,14 +29,16 @@ p {
 }
 
 .App-body {
-  background-color: #282c34;
+  background-color: white;
   min-height: 1vh;
   display: flex;
   flex-direction: column;
   align-items: left;
   justify-content: center;
   font-size: calc(10px + 1vmin);
-  color: white;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  color: black;
 }
 
 .App-link {

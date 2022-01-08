@@ -1,47 +1,36 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './rustacean.svg';
 import './App.css';
-import { Button } from 'semantic-ui-react'
 import { Skill, getSkills, DiaryEntry, submitDiaryEntry } from './FetchAPI';
-
-interface DisplaySkillProps {
-  skill: Skill,
-  onChecked: (id: number) => void,
-  checked: boolean
-}
-
-function DisplaySkill(props: DisplaySkillProps) {
-  let { skill, onChecked, checked } = props;
-  let onChange = (_event: ChangeEvent<HTMLInputElement>) => {
-      onChecked(skill.id);
-  }
-  return (
-    <ul>
-      <label>
-        {skill.name}:
-          <input type="checkbox" id={skill.name} name={skill.name} onChange={onChange} checked={!!checked}/>
-      </label>
-    </ul>
-  );
-}
-
+import { DisplaySkill } from './components/DisplaySkill';
 
 type CheckedSkills = {
     [key: number]: boolean;
+}
+
+type CatSkills = {
+    [key: string]: Skill[];
 }
 
 function App() {
 
   const [skills, setSkills] = useState<Skill[]>([]);
   const [checked, setChecked] = useState<CheckedSkills>({});
-  const [phrasing, updatePhrasing] = useState("");
 
   useEffect(() => {
     getSkills('/skills').then(setSkills);
   }, []);
 
+  let cat_skills = skills.reduce((init: CatSkills, skill: Skill) => {
+      if (!init[skill.category]) {
+     init[skill.category] = [];
+   }
+   init[skill.category].push(skill);
+    return init
+  }, {});
+
   let updateChecked = (id: number) => {
-      setChecked({...checked, [id]: !checked[id]});
+    setChecked({ ...checked, [id]: !checked[id] });
   }
 
   let checkSkills = Object.entries(checked).reduce((init: number[], [key, value]) => {
@@ -50,6 +39,15 @@ function App() {
     };
     return init
   }, []);
+
+function displayedSkills(cat: string) {
+    if (!cat_skills[cat]) {
+        return
+    };
+   return cat_skills[cat].map((skill: Skill) => {
+      return <DisplaySkill skill={skill} onChecked={updateChecked} checked={checked[skill.id]} key={skill.id} />
+    })
+  };
 
   const diaryentry: DiaryEntry = {
       entry_date: new Date(),
@@ -61,35 +59,26 @@ function App() {
     submitDiaryEntry('/diary_entries', diaryentry);
   }
 
-  function rephrase(event: ChangeEvent<HTMLInputElement>) {
-    let text: string = event.target.value;
-    updatePhrasing(text);
-  }
-
-  let displayedSkills = skills.map((skill: Skill) => {
-      return <DisplaySkill skill={skill} onChecked={updateChecked} checked={checked[skill.id]} key={skill.id} />
-  });
-
-
-
   return (
     <div className="App">
-      <header className="App-body">
-        <div>
-          <img src={logo} className="App-logo" alt="logo" />
-        </div>
-        <form>
-          {displayedSkills}
-          <div>
-            <Button type="submit" onClick={handleClick}>Submit</Button>
-          </div>
-        </form>
-        <p>
-          {phrasing}
-        </p>
-        <input onChange={rephrase} type="text" />
-      </header>
-    </div>
+      <h2 className="ui header"><img src={logo} className="ui circular image" />DBT Skills </h2>
+      <div className="ui section divider"></div>
+      <div>
+        <h2>Mindfulness</h2>
+        {displayedSkills('mindfulness')}
+      </div>
+      <div className="ui section divider"></div>
+      <div>
+        <h2>Emotion Regulation</h2>
+        {displayedSkills('emotion_regulation')}
+      </div>
+      <div className="ui section divider"></div>
+      <div>
+        <h2>Distress Tolerance</h2>
+        {displayedSkills('distress_tolerance')}
+      </div>
+      <button className="ui primary button" type="submit" onClick={handleClick}>Submit</button>
+    </div >
   );
 }
 
