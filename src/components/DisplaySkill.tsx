@@ -1,5 +1,5 @@
 import { ChangeEvent, MouseEvent } from "react";
-import { Accordion, AccordionTitleProps, Icon } from "semantic-ui-react";
+import { Accordion, AccordionTitleProps, Icon, Label } from "semantic-ui-react";
 import { Skill } from "../FetchAPI";
 
 interface ToggleSkillProps {
@@ -37,18 +37,17 @@ function ToggleSkill(props: ToggleSkillProps) {
   let skill_name = CapitalizeSkill(skill.name);
 
   return (
-    <div>
+    <div className="skill">
       <div className="ui toggle checkbox">
-        <p style={{ paddingTop: 2 }}>
-          <input
-            type="checkbox"
-            id={skill.name}
-            name={skill.name}
-            onChange={onChange}
-            checked={!!checked}
-          />
-          <label>{skill_name}</label>
-        </p>
+        <input
+          type="checkbox"
+          id={skill.name}
+          name={skill.name}
+          onChange={onChange}
+          checked={!!checked}
+        />
+        <label> {skill_name}
+        </label>
       </div>
     </div>
   );
