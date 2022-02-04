@@ -1,16 +1,23 @@
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Calendar  from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 import UIButton from "./components/Button";
+import { retreiveDiaryEntry } from "./FetchAPI";
+import { getDate} from "./Date";
 
-
-
-const Home = () => {
+function Home() {
+    const [value, onChange] = useState(new Date());
+    let navigate = useNavigate();
+    let handleClickedDay = (value: Date) => {
+        let entryDate = getDate(value);
+        navigate("/diary/" + entryDate);
+    };
     return (
-        <div>
+        <>
             <h2>Welcome!</h2>
-            <Link to="/diary">
-            <UIButton text="Diary Entry"/>
-            </Link>
-        </div>
+            <Calendar onChange={onChange} value={value} onClickDay={handleClickedDay}/>
+        </>
     );
 };
 

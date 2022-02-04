@@ -1,9 +1,11 @@
 import React, { useEffect, useState, MouseEvent } from "react";
+import { useParams } from "react-router-dom";
 import "./App.css";
-import { Skill, getSkills, DiaryEntry, submitDiaryEntry } from "./FetchAPI";
+import { Skill, getSkills, DiaryEntry, submitDiaryEntry, getDiaryEntrySkills, DiaryEntrySkills, retreiveDiaryEntry } from "./FetchAPI";
 import { SkillsGroup } from "./components/DisplaySkill";
 import UIButton from "./components/Button";
 import { Accordion, AccordionTitleProps } from "semantic-ui-react";
+import { getDate } from "./Date";
 
 type CheckedSkills = {
   [key: number]: boolean;
@@ -13,10 +15,23 @@ type CategorizedSkills = {
   [key: string]: Skill[];
 };
 
-const Diary = () => {
+debugger
+function Diary () {
+  let { entryDate } = useParams<string>();
+
   const [skills, setSkills] = useState<Skill[]>([]);
   const [checked, setChecked] = useState<CheckedSkills>({});
   const [activeIndex, setActiveIndex] = useState<number>(0);
+
+  let date = entryDate!;
+
+     useEffect(() => {
+       retreiveDiaryEntry(date);
+      }, []);
+
+  useEffect(() => {
+      getDiaryEntrySkills(date).then(initChecked)
+  }, []);
 
   useEffect(() => {
     getSkills("/skills").then(setSkills);
@@ -32,6 +47,16 @@ const Diary = () => {
     },
     {}
   );
+
+  let initChecked = (diaryEntrySkills: DiaryEntrySkills[]) => {
+    let skillIDs = diaryEntrySkills.map(item => item['skills_id']);
+    let checked = skillIDs.reduce(
+      (init: CheckedSkills, skillID) => (
+        {...init,[skillID]:true}),
+      {}
+    );
+    setChecked(checked);
+  };
 
   let updateChecked = (id: number) => {
     setChecked({ ...checked, [id]: !checked[id] });
@@ -63,13 +88,13 @@ const Diary = () => {
   };
 
   const diaryentry: DiaryEntry = {
-    entry_date: new Date(),
+    entry_date: new Date(date),
     skill_ids: checkSkills,
   };
 
   let submitForm = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    submitDiaryEntry("/diary_entries", diaryentry);
+    submitDiaryEntry(diaryentry);
   };
 
   return (
