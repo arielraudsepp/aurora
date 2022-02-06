@@ -1,5 +1,3 @@
-import { getDate } from "./Date";
-
 export interface Skill {
     id: number;
     name: string;
@@ -50,16 +48,32 @@ export async function retreiveDiaryEntry(date: string) {
             'Content-Type': 'application/json'
         }
     });
+    let value;
     if (response.status === 404) {
-           submitDiaryEntry(
+       let entry = submitDiaryEntry(
             {
                 "entry_date": new Date(date),
                 "skill_ids": []
             }
-        );
+        ).then((response) => {
+            return response
+        })
+        value = entry;
     } else {
-        return response.json;
+        value = response;
     }
+    return value;
+}
+
+export async function updateDiaryEntry(entry_id: number, data: DiaryEntry) {
+    const response = await fetch ('http://localhost:8000/diary_entries/' + entry_id, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    return response.json();
 }
 
 export async function getDiaryEntrySkills(date: string): Promise<DiaryEntrySkills[]> {
@@ -71,16 +85,3 @@ export async function getDiaryEntrySkills(date: string): Promise<DiaryEntrySkill
 
     return response.json();
 }
-
-
-// .catch((err) => {
-//         if (err.status === 404) {
-//         submitDiaryEntry(
-//             {
-//                 "entry_date": date,
-//                 "skill_ids": []
-//             }
-//         );
-//             retreiveDiaryEntry(date);
-//         }
-//     })

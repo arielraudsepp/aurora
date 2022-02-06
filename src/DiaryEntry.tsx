@@ -1,11 +1,10 @@
 import React, { useEffect, useState, MouseEvent } from "react";
 import { useParams } from "react-router-dom";
 import "./App.css";
-import { Skill, getSkills, DiaryEntry, submitDiaryEntry, getDiaryEntrySkills, DiaryEntrySkills, retreiveDiaryEntry } from "./FetchAPI";
+import { Skill, getSkills, DiaryEntry, getDiaryEntrySkills, DiaryEntrySkills, retreiveDiaryEntry, updateDiaryEntry } from "./FetchAPI";
 import { SkillsGroup } from "./components/DisplaySkill";
 import UIButton from "./components/Button";
 import { Accordion, AccordionTitleProps } from "semantic-ui-react";
-import { getDate } from "./Date";
 
 type CheckedSkills = {
   [key: number]: boolean;
@@ -15,27 +14,30 @@ type CategorizedSkills = {
   [key: string]: Skill[];
 };
 
-debugger
 function Diary () {
   let { entryDate } = useParams<string>();
 
   const [skills, setSkills] = useState<Skill[]>([]);
+  const [diaryEntryId, setDiaryEntryId] = useState<number>(0);
   const [checked, setChecked] = useState<CheckedSkills>({});
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   let date = entryDate!;
 
-     useEffect(() => {
-       retreiveDiaryEntry(date);
-      }, []);
+  useEffect(() => {
+  retreiveDiaryEntry(date).then((value) => {
+    setDiaryEntryId(value.id);
+  })
+  }, []);
 
   useEffect(() => {
-      getDiaryEntrySkills(date).then(initChecked)
+    getDiaryEntrySkills(date).then(initChecked)
   }, []);
 
   useEffect(() => {
     getSkills("/skills").then(setSkills);
   }, []);
+
 
   let categorized_skills = skills.reduce(
     (init: CategorizedSkills, skill: Skill) => {
@@ -92,9 +94,11 @@ function Diary () {
     skill_ids: checkSkills,
   };
 
+  const entry_id = diaryEntryId;
+
   let submitForm = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    submitDiaryEntry(diaryentry);
+   updateDiaryEntry(entry_id, diaryentry);
   };
 
   return (
