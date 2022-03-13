@@ -45,3 +45,15 @@ p {
 .App-link {
   color: #61dafb;
 }
+
+table {
+  border: 2px solid black;
+}
+
+th {
+  border-bottom: 1px solid black;
+}
+
+td {
+  text-align: center;
+}

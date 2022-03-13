@@ -3,6 +3,7 @@ import logo from "./rustacean.svg";
 import "./App.css";
 import Home from "./Home";
 import DiaryEntry from "./DiaryEntry";
+import Chart from "./Chart";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="diary/:entryDate" element={<DiaryEntry />} />
+        <Route path="/chart" element={<Chart />} />
       </Routes>
     </div>
   );
