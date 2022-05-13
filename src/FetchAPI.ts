@@ -85,3 +85,29 @@ export async function getDiaryEntrySkills(date: string): Promise<DiaryEntrySkill
 
     return response.json();
 }
+
+
+export async function login(loginData: string) {
+    const response = await fetch ('http://localhost:8000/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: loginData
+    });
+
+    return response.status;
+}
+
+
+export async function signup(signupData: string) {
+    const response = await fetch ('http://localhost:8000/signup', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: signupData
+    });
+
+    return response.status;
+}

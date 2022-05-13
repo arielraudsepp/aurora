@@ -4,6 +4,8 @@ import "./App.css";
 import Home from "./Home";
 import DiaryEntry from "./DiaryEntry";
 import Chart from "./Chart";
+import Login from "./Login";
+import Signup from "./Signup";
 
 function App() {
   return (
@@ -13,7 +15,9 @@ function App() {
         <Link to="/">DBT Skills</Link>
       </h1>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/home" element={<Home />} />
         <Route path="diary/:entryDate" element={<DiaryEntry />} />
         <Route path="/chart" element={<Chart />} />
       </Routes>
