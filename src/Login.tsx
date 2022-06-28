@@ -8,23 +8,6 @@ interface StatusProps {
     status: number;
 }
 
-function HandleResponse(props: StatusProps) {
-    let navigate = useNavigate();
-
-    let {status} = props;
-    if (status === 200) {
-        navigate("/home")
-        return (
-            <></>
-        )
-    } else if (status === 404) {
-
-    } else {
-        return(<></>)
-    }
-}
-
-
     function Login() {
         const [form, setForm] = useState({ username: '', password: '' });
         const [isError, setError] = useState<boolean>(false);
@@ -41,10 +24,11 @@ function HandleResponse(props: StatusProps) {
 
 
         const handleSubmit = () => {
-            login(JSON.stringify(form)).then((response_status) => {
-                if (response_status === 404) {
+            login(JSON.stringify(form)).then((response) => {
+                console.log(response);
+                if (response.status === 404) {
                     setError(true);
-                } else if (response_status === 200) {
+                } else if (response.status === 200) {
                     navigate("/home");
                 }
             });
@@ -52,7 +36,7 @@ function HandleResponse(props: StatusProps) {
 
 
         let handleClick = () => navigate("/signup");
-        // Generate JSX code for error message
+
 
         return (
             <>
@@ -69,8 +53,6 @@ function HandleResponse(props: StatusProps) {
                 </Form>
                 <h3>Don't have an account? </h3>
                 <Button onClick={handleClick} content="Sign Up"/>
-
-
             </>
         );
     }
