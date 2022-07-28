@@ -29,6 +29,7 @@ interface StatusProps {
                 if (response.status === 404) {
                     setError(true);
                 } else if (response.status === 200) {
+                    localStorage.setItem("auth_token", "true");
                     navigate("/home");
                 }
             });

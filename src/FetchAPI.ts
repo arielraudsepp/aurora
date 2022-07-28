@@ -108,4 +108,4 @@ export async function signup(signupData: string) {
     return response.status;
 }
 
-export async function dashboard();
+//export async function dashboard();
