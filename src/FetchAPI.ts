@@ -31,7 +31,7 @@ export async function getSkills(route: string): Promise<Skill[]> {
     return response.json();
 }
 
-export async function submitDiaryEntry(data: DiaryEntry) {
+export async function submitDiaryEntry(data: DiaryEntry): Promise<DiaryEntrySkills> {
     const response = await fetch ('http://localhost:8000/diary_entries', {
         method: 'POST',
         headers: {
@@ -50,17 +50,15 @@ export async function retreiveDiaryEntry(date: string) {
     });
     let value;
     if (response.status === 404) {
-       let entry = submitDiaryEntry(
+       let entry = await submitDiaryEntry(
             {
                 "entry_date": new Date(date),
                 "skill_ids": []
             }
-        ).then((response) => {
-            return response
-        })
+        )
         value = entry;
     } else {
-        value = response;
+        value = response.json();
     }
     return value;
 }
