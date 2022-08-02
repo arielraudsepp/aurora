@@ -1,10 +1,9 @@
 import React, { useEffect, useState, MouseEvent } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./App.css";
 import { Skill, getSkills, DiaryEntry, getDiaryEntrySkills, DiaryEntrySkills, retreiveDiaryEntry, updateDiaryEntry } from "./FetchAPI";
 import { SkillsGroup } from "./components/DisplaySkill";
-import UIButton from "./components/Button";
-import { Accordion, AccordionTitleProps } from "semantic-ui-react";
+import { Accordion, AccordionTitleProps, Button } from "semantic-ui-react";
 
 type CheckedSkills = {
   [key: number]: boolean;
@@ -22,6 +21,7 @@ function Diary () {
   const [checked, setChecked] = useState<CheckedSkills>({});
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
+  let navigate = useNavigate();
   let date = entryDate!;
 
   useEffect(() => {
@@ -99,6 +99,7 @@ function Diary () {
   let submitForm = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
    updateDiaryEntry(entry_id, diaryentry);
+    navigate("/home");
   };
 
   return (
@@ -132,7 +133,7 @@ function Diary () {
           handle_click={toggleAccordion}
         />
       </Accordion>
-      <UIButton text="Submit" onClick={submitForm} />
+      <Button content="Submit" onClick={submitForm} />
     </div>
   );
 }
