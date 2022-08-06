@@ -1,34 +1,50 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Calendar  from "react-calendar";
-import "react-calendar/dist/Calendar.css";
-import { getDate} from "./Date";
-import { Button } from "semantic-ui-react";
+import { useNavigate } from "react-router-dom";
+import { Button, Segment, Container, Header } from "semantic-ui-react";
 
 function Home() {
-    const [value, onChange] = useState(new Date());
-
     let navigate = useNavigate();
-
-    let handleClickedDay = (value: Date) => {
-        let entryDate = getDate(value);
-        navigate("/diary/" + entryDate);
-    };
-
-    let logout = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-        localStorage.removeItem("auth_token");
-        navigate("");
-    };
-
+    let navigateSignup = () => navigate("/signup");
     return (
         <>
-            <h2>Welcome!</h2>
-            <Calendar onChange={onChange} value={value} onClickDay={handleClickedDay} />
-            <Button content="Logout" onClick={logout} />
-        </>
+            <Container text>
+                <Header
+                    as='h1'
+                    content='DBT Skills Tracker'
 
+                    style={{
+                        fontSize: '4em',
+                        fontWeight: 'normal',
+                        marginBottom: 0,
+                        marginTop: '2em',
+                    }}
+                />
+                <Header
+                    as='h2'
+                    content='Helps you track and view DBT skill use'
+
+                    style={{
+                        fontSize: '1.7em',
+                        fontWeight: 'normal',
+                        marginTop: '1.5em',
+                    }}
+                />
+                <Button primary size='huge' onClick={navigateSignup}>
+                    Get Started
+                </Button>
+            </Container>
+
+            <Segment style={{ padding: '8em 0em' }} vertical>
+                <Container text>
+                    <Header as='h3' style={{ fontSize: '2em' }}>
+                        Tell Me More
+                    </Header>
+                    <p style={{ fontSize: '1.33em' }}>
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa strong. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
+                    </p>
+                </Container>
+            </Segment>
+        </>
     );
-};
+}
 
 export default Home;
