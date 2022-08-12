@@ -25,7 +25,8 @@ export async function getSkills(route: string): Promise<Skill[]> {
     const response = await fetch('http://localhost:8000'.concat(route), {
         headers: {
             'Content-Type': 'application/json'
-        }
+        },
+        credentials: 'include'
     });
 
     return response.json();
@@ -37,7 +38,8 @@ export async function submitDiaryEntry(data: DiaryEntry): Promise<DiaryEntrySkil
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
+        credentials: 'include'
     });
     return response.json();
 }
@@ -45,8 +47,9 @@ export async function submitDiaryEntry(data: DiaryEntry): Promise<DiaryEntrySkil
 export async function retreiveDiaryEntry(date: string) {
     let response = await fetch ('http://localhost:8000/diary_entries/' + date , {
         headers: {
-            'Content-Type': 'application/json'
-        }
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include'
     });
     let value;
     if (response.status === 404) {
@@ -69,7 +72,8 @@ export async function updateDiaryEntry(entry_id: number, data: DiaryEntry) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
+        credentials: 'include'
     });
     return response.json();
 }
@@ -78,7 +82,8 @@ export async function getDiaryEntrySkills(date: string): Promise<DiaryEntrySkill
     const response = await fetch ('http://localhost:8000/diary_entries/' + date + "/skills", {
        headers: {
            'Content-Type': 'application/json'
-       }
+       },
+        credentials: 'include'
     });
 
     return response.json();
@@ -90,7 +95,8 @@ export async function login(loginData: string) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: loginData
+        body: loginData,
+        credentials: 'include'
     });
     return response;
 }
