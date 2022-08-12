@@ -1,4 +1,4 @@
-import { Routes, Route, Link, useLocation, Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate, Outlet, useNavigate } from "react-router-dom";
 import logo from "./rustacean.svg";
 import "./App.css";
 import Calendar from "./Calendar";
@@ -7,10 +7,11 @@ import Chart from "./Chart";
 import Login from "./Login";
 import Signup from "./Signup";
 import Home from "./Home";
-import { Button, Menu } from "semantic-ui-react";
+import { Button, Image, Menu } from "semantic-ui-react";
+import { NavigationBar } from "./components/NavigationBar";
 
 function RequireAuth() {
-  let auth = localStorage.getItem("auth_token");
+  let auth = localStorage.getItem("auth");
   let location = useLocation();
 
   if (!auth) {
@@ -23,20 +24,9 @@ function RequireAuth() {
 
 function App() {
   let navigate = useNavigate();
-  let navigateHome = () => navigate("/");
-  let navigateLogin = () => navigate("/login");
-  let navigateSignup = () => navigate("/signup");
   return (
     <div className="App">
-      <Menu>
-        <Menu.Item>
-          <img src={logo} onClick={navigateHome}/>
-        </Menu.Item>
-        <Menu.Item position='right'>
-          <Button onClick={navigateLogin} content="Log In"/>
-          <Button style={{ marginLeft: '0.5em' }} onClick={navigateSignup} content="Sign Up"/>
-        </Menu.Item>
-      </Menu>
+      <NavigationBar/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

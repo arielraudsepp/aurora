@@ -7,6 +7,7 @@ import { login } from "./FetchAPI";
 function Login() {
     const [form, setForm] = useState({ username: '', password: '' });
     const [isError, setError] = useState<boolean>(false);
+    const [item, setItem] = useState("");
 
     const onUpdateField = (e: FormEvent<HTMLInputElement>) => {
         const nextFormState = {
@@ -23,9 +24,10 @@ function Login() {
         login(JSON.stringify(form)).then((response) => {
             if (response.status === 404) {
                 setError(true);
+                localStorage.setItem("auth", "false")
             } else if (response.status === 200) {
-                localStorage.setItem("auth_token", "true");
-                navigate("/home");
+                localStorage.setItem("auth", "true");
+                navigate("/calendar");
             }
         });
     };

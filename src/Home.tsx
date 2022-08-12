@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { Button, Segment, Container, Header } from "semantic-ui-react";
+import { Button, Segment, Container, Header, Image } from "semantic-ui-react";
+import logo from "./rustacean.svg";
 
 function Home() {
     let navigate = useNavigate();
@@ -7,17 +8,17 @@ function Home() {
     return (
         <>
             <Container text>
-                <Header
-                    as='h1'
-                    content='DBT Skills Tracker'
+                <Header as='h1'
+                        style={{
+                            fontSize: '4em',
+                            fontWeight: 'normal',
+                            marginBottom: 0,
+                            marginTop: '2em',
+                        }}>
 
-                    style={{
-                        fontSize: '4em',
-                        fontWeight: 'normal',
-                        marginBottom: 0,
-                        marginTop: '2em',
-                    }}
-                />
+                    <Image src={logo}/>
+                    DBT Skills Tracker
+                </Header>
                 <Header
                     as='h2'
                     content='Helps you track and view DBT skill use'
@@ -39,7 +40,8 @@ function Home() {
                         Tell Me More
                     </Header>
                     <p style={{ fontSize: '1.33em' }}>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa strong. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
+                        DBT (Dialectial Behavioural Theray) skill tracker replaces your paper DBT diary card. A diary card is a tool unique used in DBT.
+                        It helps track when symptoms occur and which skills are used to cope with those symptoms.
                     </p>
                 </Container>
             </Segment>
