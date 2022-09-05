@@ -21,30 +21,86 @@ export interface DiaryEntryRecord {
     created_at: Date;
 };
 
-export async function getSkills(route: string): Promise<Skill[]> {
-    const response = await fetch('http://localhost:8000'.concat(route), {
+
+const get = async <TResponse> (url: string): Promise<TResponse> => {
+    const response = await fetch('http://localhost:8000' + url, {
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json'
         },
-        credentials: 'include'
     });
-
     return response.json();
 }
 
+const post = async <TBody, TResponse> (url: string, data: TBody): Promise<TResponse> => {
+    const response = await fetch('http://localhost:8000' + url, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    return response.json();
+}
+
+const patch = async <TBody, TResponse> (url: string, data: TBody): Promise<TResponse> => {
+    const response = await fetch ('http://localhost:8000' + url, {
+        method: 'PATCH',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    return response.json();
+}
+
+export function getSkills(): Promise<Skill[]> {
+    return get('/skills');
+}
+
+export async function getDiaryEntrySkills(date: string): Promise<DiaryEntrySkills[]> {
+    return get('/diary_entries/' + date + '/skills');
+}
+
+export async function getUsername(): Promise<string> {
+    return get('/session_username');
+}
+
 export async function submitDiaryEntry(data: DiaryEntry): Promise<DiaryEntrySkills> {
-    const response = await fetch ('http://localhost:8000/diary_entries', {
+    return post('/diary_entries', data);
+}
+
+export async function updateDiaryEntry(entry_id: number, data: DiaryEntry): Promise<DiaryEntryRecord> {
+    return patch('/diary_entries/' + entry_id, data);
+}
+
+export async function login(loginData: string): Promise<Response> {
+    const response = await fetch ('http://localhost:8000/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data),
+        // loginData has already been stringified
+        body: loginData,
         credentials: 'include'
     });
-    return response.json();
+    return response;
 }
 
-export async function retreiveDiaryEntry(date: string) {
+export async function signup(signupData: string) {
+    const response = await fetch ('http://localhost:8000/signup', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: signupData
+    });
+    return response.status;
+}
+
+export async function retreiveDiaryEntry(date: string): Promise<DiaryEntryRecord> {
     let response = await fetch ('http://localhost:8000/diary_entries/' + date , {
         headers: {
             'Content-Type': 'application/json',
@@ -65,51 +121,3 @@ export async function retreiveDiaryEntry(date: string) {
     }
     return value;
 }
-
-export async function updateDiaryEntry(entry_id: number, data: DiaryEntry) {
-    const response = await fetch ('http://localhost:8000/diary_entries/' + entry_id, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data),
-        credentials: 'include'
-    });
-    return response.json();
-}
-
-export async function getDiaryEntrySkills(date: string): Promise<DiaryEntrySkills[]> {
-    const response = await fetch ('http://localhost:8000/diary_entries/' + date + "/skills", {
-       headers: {
-           'Content-Type': 'application/json'
-       },
-        credentials: 'include'
-    });
-
-    return response.json();
-}
-
-export async function login(loginData: string) {
-    const response = await fetch ('http://localhost:8000/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: loginData,
-        credentials: 'include'
-    });
-    return response;
-}
-
-export async function signup(signupData: string) {
-    const response = await fetch ('http://localhost:8000/signup', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: signupData
-    });
-    return response.status;
-}
-
-//export async function dashboard();
