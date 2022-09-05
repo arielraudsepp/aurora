@@ -4,7 +4,7 @@ import { Form, Message, Button } from "semantic-ui-react";
 import { signup } from "./FetchAPI";
 
 
-function Login() {
+function Signup() {
     const [form, setForm] = useState({ username: '', password: '' });
     const [isSubmitted, setSubmitted] = useState<boolean>(false);
     const [isError, setError] = useState<boolean>(false);
@@ -55,4 +55,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default Signup;

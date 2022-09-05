@@ -21,7 +21,7 @@ export default function Chart(){
 
     // gets the set of all skill ids, names, and categories
     useEffect(() => {
-        getSkills("/skills").then(setSkills);
+        getSkills().then(setSkills);
     }, []);
 
     // gets the skill ids from the diary entry skills

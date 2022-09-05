@@ -6,8 +6,8 @@ import { login } from "./FetchAPI";
 
 function Login() {
     const [form, setForm] = useState({ username: '', password: '' });
-    const [isError, setError] = useState<boolean>(false);
-    const [item, setItem] = useState("");
+    const [loginError, setLoginError] = useState<boolean>(false);
+    const [connectionError, setConnectionError] = useState<boolean>(false);
 
     const onUpdateField = (e: FormEvent<HTMLInputElement>) => {
         const nextFormState = {
@@ -23,18 +23,20 @@ function Login() {
     const handleSubmit = () => {
         login(JSON.stringify(form)).then((response) => {
             if (response.status === 404) {
-                setError(true);
+                setLoginError(true);
                 localStorage.setItem("auth", "false")
-            } else if (response.status === 200) {
+            } else if (response.ok) {
                 localStorage.setItem("auth", "true");
                 navigate("/calendar");
             }
+        })
+        .catch((error) => {
+            console.log(error.message);
+            setConnectionError(true);
         });
     };
 
-
     let handleClick = () => navigate("/signup");
-
 
     return (
         <>
@@ -45,14 +47,18 @@ function Login() {
                     <Form.Input label='Password' type='password' name='password' width={6} value ={form.password} onChange={onUpdateField} required/>
                 </Form.Group>
                 <Form.Button>Login</Form.Button>
-                {isError ?
+                {loginError &&
                  <Message error header='Invalid login credentials' content='Please try again'/>
-                : <></>}
+                }
             </Form>
+            {connectionError &&
+             <Message error header='Network connection error' content='Please try again later'/>
+            }
             <h3>Don't have an account? </h3>
             <Button onClick={handleClick} content="Sign Up"/>
         </>
     );
+
 }
 
 export default Login;
