@@ -27,6 +27,7 @@ function Diary() {
   useEffect(() => {
     retreiveDiaryEntry(date).then((value) => {
       setDiaryEntryId(value.id);
+      console.log(entry_id);
     })
   }, []);
 
@@ -92,6 +93,7 @@ function Diary() {
   const diaryentry: DiaryEntry = {
     entry_date: new Date(date),
     skill_ids: checkSkills,
+    notes: 'test',
   };
 
   const entry_id = diaryEntryId;
@@ -100,6 +102,7 @@ function Diary() {
     event.preventDefault();
     updateDiaryEntry(entry_id, diaryentry);
     navigate("/calendar");
+    console.log(diaryentry.notes);
   };
 
   return (

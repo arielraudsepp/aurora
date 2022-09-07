@@ -7,6 +7,7 @@ export interface Skill {
 export interface DiaryEntry {
     entry_date: Date;
     skill_ids: number[];
+    notes: string;
 };
 
 export interface DiaryEntrySkills {
@@ -19,6 +20,7 @@ export interface DiaryEntryRecord {
     id: number;
     entry_date: Date;
     created_at: Date;
+    notes: string;
 };
 
 
@@ -73,6 +75,7 @@ export async function submitDiaryEntry(data: DiaryEntry): Promise<DiaryEntrySkil
 }
 
 export async function updateDiaryEntry(entry_id: number, data: DiaryEntry): Promise<DiaryEntryRecord> {
+    console.log(data.notes);
     return patch('/diary_entries/' + entry_id, data);
 }
 
@@ -112,7 +115,8 @@ export async function retreiveDiaryEntry(date: string): Promise<DiaryEntryRecord
        let entry = await submitDiaryEntry(
             {
                 "entry_date": new Date(date),
-                "skill_ids": []
+                "skill_ids": [],
+                "notes": '',
             }
         )
         value = entry;

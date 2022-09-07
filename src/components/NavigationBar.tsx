@@ -1,4 +1,5 @@
 import logo from "../rustacean.svg";
+import { BsFillCalendarPlusFill } from "react-icons/bs";
 import { Button, Image, Menu } from "semantic-ui-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -26,14 +27,21 @@ function Authenticated() {
         navigate("");
     };
 
+    const navigateToCalendar = () => {
+        navigate("/calendar");
+    };
+
     useEffect(() => {
         getUsername().then(setUsername);
     }, []);
 
     return (
         <Menu.Item position='right'>
-            <h3>Hi {username}</h3>
-            <Button primary={true}  style={{ marginLeft: '0.5em' }} onClick={navigateHome} content="Log Out"/>
+            <Menu.Item>
+            <h3>Hi {username} </h3>
+            </Menu.Item>
+            <a href="/calendar"> <BsFillCalendarPlusFill size={35}/> </a>
+            <Button primary={true}  style={{ marginLeft: '1.0em' }} onClick={navigateHome} content="Log Out"/>
         </Menu.Item>
     )
 }
