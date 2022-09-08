@@ -1,4 +1,4 @@
-import React, { useEffect, useState, MouseEvent } from "react";
+import React, { useEffect, useState, MouseEvent, ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./App.css";
 import { Skill, getSkills, DiaryEntry, getDiaryEntrySkills, DiaryEntrySkills, retreiveDiaryEntry, updateDiaryEntry } from "./FetchAPI";
@@ -18,6 +18,7 @@ function Diary() {
 
   const [skills, setSkills] = useState<Skill[]>([]);
   const [diaryEntryId, setDiaryEntryId] = useState<number>(0);
+  const [notes, setNotes] = useState<string>("");
   const [checked, setChecked] = useState<CheckedSkills>({});
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
@@ -27,7 +28,7 @@ function Diary() {
   useEffect(() => {
     retreiveDiaryEntry(date).then((value) => {
       setDiaryEntryId(value.id);
-      console.log(entry_id);
+      setNotes(value.notes);
     })
   }, []);
 
@@ -39,6 +40,9 @@ function Diary() {
     getSkills().then(setSkills);
   }, []);
 
+  let updateNotes = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setNotes(event.target.value);
+  }
 
   let categorized_skills = skills.reduce(
     (init: CategorizedSkills, skill: Skill) => {
@@ -93,7 +97,7 @@ function Diary() {
   const diaryentry: DiaryEntry = {
     entry_date: new Date(date),
     skill_ids: checkSkills,
-    notes: 'test',
+    notes: notes,
   };
 
   const entry_id = diaryEntryId;
@@ -136,6 +140,10 @@ function Diary() {
           handle_click={toggleAccordion}
         />
       </Accordion>
+      <div>
+        <label> Notes</label>
+        <textarea value= {notes} onChange={updateNotes}/>
+      </div>
       <Button content="Submit" onClick={submitForm} />
     </div>
   );
