@@ -1,8 +1,8 @@
 import React, { useEffect, useState, MouseEvent, ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "./App.css";
-import { Skill, getSkills, DiaryEntry, getDiaryEntrySkills, DiaryEntrySkills, retreiveDiaryEntry, updateDiaryEntry } from "./FetchAPI";
-import { SkillsGroup } from "./components/DisplaySkill";
+import "../App.css";
+import { Skill, getSkills, DiaryEntry, getDiaryEntrySkills, DiaryEntrySkills, retreiveDiaryEntry, updateDiaryEntry } from "../FetchAPI";
+import { SkillsGroup } from "./DisplaySkill";
 import { Accordion, AccordionTitleProps, Button } from "semantic-ui-react";
 
 type CheckedSkills = {

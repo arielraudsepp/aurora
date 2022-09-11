@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Message } from "semantic-ui-react";
-import { login } from "./FetchAPI";
+import { login } from "../FetchAPI";
 
 
 function Login() {
@@ -30,10 +30,10 @@ function Login() {
                 navigate("/calendar");
             }
         })
-        .catch((error) => {
-            console.log(error.message);
-            setConnectionError(true);
-        });
+            .catch((error) => {
+                console.log(error.message);
+                setConnectionError(true);
+            });
     };
 
     let handleClick = () => navigate("/signup");
@@ -43,19 +43,19 @@ function Login() {
             <Form onSubmit={handleSubmit}>
                 <h2>Please Login!</h2>
                 <Form.Group>
-                    <Form.Input label='Email' name='email' value={form.email} width={6} onChange={onUpdateField} required/>
-                    <Form.Input label='Password' type='password' name='password' width={6} value ={form.password} onChange={onUpdateField} required/>
+                    <Form.Input label='Email' name='email' value={form.email} width={6} onChange={onUpdateField} required />
+                    <Form.Input label='Password' type='password' name='password' width={6} value={form.password} onChange={onUpdateField} required />
                 </Form.Group>
                 <Form.Button>Login</Form.Button>
                 {loginError &&
-                 <Message error header='Invalid login credentials' content='Please try again'/>
+                    <Message error header='Invalid login credentials' content='Please try again' />
                 }
             </Form>
             {connectionError &&
-             <Message error header='Network connection error' content='Please try again later'/>
+                <Message error header='Network connection error' content='Please try again later' />
             }
             <h3>Don't have an account? </h3>
-            <Button onClick={handleClick} content="Sign Up"/>
+            <Button onClick={handleClick} content="Sign Up" />
         </>
     );
 

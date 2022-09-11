@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Calendar  from "react-calendar";
+import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { getDate} from "./Date";
-import './App.css';
+import { getDate } from "../Date";
+import '../App.css';
 
 function Home() {
     const [value, onChange] = useState(new Date());

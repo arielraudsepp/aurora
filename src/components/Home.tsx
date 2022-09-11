@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Button, Segment, Container, Header, Image } from "semantic-ui-react";
-import logo from "./rustacean.svg";
+import logo from "../rustacean.svg";
 
 function Home() {
     let navigate = useNavigate();
@@ -9,14 +9,14 @@ function Home() {
         <>
             <Container text>
                 <Header as='h1'
-                        style={{
-                            fontSize: '4em',
-                            fontWeight: 'normal',
-                            marginBottom: 0,
-                            marginTop: '2em',
-                        }}>
+                    style={{
+                        fontSize: '4em',
+                        fontWeight: 'normal',
+                        marginBottom: 0,
+                        marginTop: '2em',
+                    }}>
 
-                    <Image src={logo}/>
+                    <Image src={logo} />
                     DBT Skills Tracker
                 </Header>
                 <Header

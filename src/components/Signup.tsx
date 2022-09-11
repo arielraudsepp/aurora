@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Message, Button } from "semantic-ui-react";
-import { signup } from "./FetchAPI";
+import { signup } from "../FetchAPI";
 
 
 function Signup() {
