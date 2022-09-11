@@ -24,7 +24,7 @@ export interface DiaryEntryRecord {
 };
 
 
-const get = async <TResponse> (url: string): Promise<TResponse> => {
+const get = async <TResponse>(url: string): Promise<TResponse> => {
     const response = await fetch('http://localhost:8000' + url, {
         credentials: 'include',
         headers: {
@@ -34,7 +34,7 @@ const get = async <TResponse> (url: string): Promise<TResponse> => {
     return response.json();
 }
 
-const post = async <TBody, TResponse> (url: string, data: TBody): Promise<TResponse> => {
+const post = async <TBody, TResponse>(url: string, data: TBody): Promise<TResponse> => {
     const response = await fetch('http://localhost:8000' + url, {
         method: 'POST',
         credentials: 'include',
@@ -46,8 +46,8 @@ const post = async <TBody, TResponse> (url: string, data: TBody): Promise<TRespo
     return response.json();
 }
 
-const patch = async <TBody, TResponse> (url: string, data: TBody): Promise<TResponse> => {
-    const response = await fetch ('http://localhost:8000' + url, {
+const patch = async <TBody, TResponse>(url: string, data: TBody): Promise<TResponse> => {
+    const response = await fetch('http://localhost:8000' + url, {
         method: 'PATCH',
         credentials: 'include',
         headers: {
@@ -66,8 +66,8 @@ export async function getDiaryEntrySkills(date: string): Promise<DiaryEntrySkill
     return get('/diary_entries/' + date + '/skills');
 }
 
-export async function getUsername(): Promise<string> {
-    return get('/session_username');
+export async function getName(): Promise<string> {
+    return get('/session_name');
 }
 
 export async function submitDiaryEntry(data: DiaryEntry): Promise<DiaryEntrySkills> {
@@ -75,12 +75,11 @@ export async function submitDiaryEntry(data: DiaryEntry): Promise<DiaryEntrySkil
 }
 
 export async function updateDiaryEntry(entry_id: number, data: DiaryEntry): Promise<DiaryEntryRecord> {
-    console.log(data.notes);
     return patch('/diary_entries/' + entry_id, data);
 }
 
 export async function login(loginData: string): Promise<Response> {
-    const response = await fetch ('http://localhost:8000/login', {
+    const response = await fetch('http://localhost:8000/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -93,7 +92,7 @@ export async function login(loginData: string): Promise<Response> {
 }
 
 export async function signup(signupData: string) {
-    const response = await fetch ('http://localhost:8000/signup', {
+    const response = await fetch('http://localhost:8000/signup', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -104,7 +103,7 @@ export async function signup(signupData: string) {
 }
 
 export async function retreiveDiaryEntry(date: string): Promise<DiaryEntryRecord> {
-    let response = await fetch ('http://localhost:8000/diary_entries/' + date , {
+    let response = await fetch('http://localhost:8000/diary_entries/' + date, {
         headers: {
             'Content-Type': 'application/json',
         },
@@ -112,7 +111,7 @@ export async function retreiveDiaryEntry(date: string): Promise<DiaryEntryRecord
     });
     let value;
     if (response.status === 404) {
-       let entry = await submitDiaryEntry(
+        let entry = await submitDiaryEntry(
             {
                 "entry_date": new Date(date),
                 "skill_ids": [],

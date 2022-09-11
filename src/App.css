@@ -5,7 +5,7 @@
   font-size: 20px;
 }
 
-.skill > .toggle{
+.skill > .toggle {
   padding: 5px 0px;
 }
 
@@ -56,4 +56,9 @@ th {
 
 td {
   text-align: center;
+}
+
+input,
+label {
+  display: block;
 }
