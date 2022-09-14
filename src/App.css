@@ -62,3 +62,7 @@ input,
 label {
   display: block;
 }
+
+.calendar {
+  background-color: green;
+}

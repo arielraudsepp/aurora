@@ -18,8 +18,9 @@ export interface DiaryEntrySkills {
 
 export interface DiaryEntryRecord {
     id: number;
-    entry_date: Date;
+    entry_date: string;
     created_at: Date;
+    updated_at: Date;
     notes: string;
 };
 
@@ -68,6 +69,10 @@ export async function getDiaryEntrySkills(date: string): Promise<DiaryEntrySkill
 
 export async function getName(): Promise<string> {
     return get('/session_name');
+}
+
+export async function getUpdatedEntries(): Promise<DiaryEntryRecord[]> {
+    return get('/diary_entries');
 }
 
 export async function submitDiaryEntry(data: DiaryEntry): Promise<DiaryEntrySkills> {
