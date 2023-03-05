@@ -23,9 +23,13 @@ interface SkillsGroupProps {
     e: MouseEvent<HTMLDivElement>,
     data: AccordionTitleProps
   ) => void;
+  mouse_on: () => void;
+  mouse_off:(
+
+    ) => void;
 }
 
-function CapitalizeSkill(word:string): string {
+function CapitalizeSkill(word: string): string {
     return word.split('_').map(str => str[0].toUpperCase() + str.substring(1)).join(' ');
   };
 
@@ -62,6 +66,8 @@ export function SkillsGroup(props: SkillsGroupProps) {
     checkedSkills,
     active_index,
     handle_click,
+    mouse_on,
+    mouse_off,
   } = props;
   let skills_group;
   if (!categorized_skills[category]) {
@@ -90,6 +96,8 @@ export function SkillsGroup(props: SkillsGroupProps) {
         active={active_index === category_index}
         index={category_index}
         onClick={handle_click}
+        onMouseEnter={mouse_on}
+        onMouseLeave={mouse_off}
       >
         <Icon name="dropdown" />
         {CategoryName}
