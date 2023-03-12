@@ -66,3 +66,9 @@ label {
 .calendar {
   background-color: green;
 }
+
+.helperText {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}

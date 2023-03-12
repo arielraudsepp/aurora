@@ -1,5 +1,5 @@
-import { ChangeEvent, MouseEvent } from "react";
-import { Accordion, AccordionTitleProps, Icon, Label } from "semantic-ui-react";
+import { useState, ChangeEvent, MouseEvent } from "react";
+import { Accordion, AccordionTitleProps, Icon, Message } from "semantic-ui-react";
 import { Skill } from "../FetchAPI";
 
 interface ToggleSkillProps {
@@ -25,11 +25,12 @@ interface SkillsGroupProps {
   ) => void;
 }
 
-function CapitalizeSkill(word:string): string {
+function CapitalizeSkill(word: string): string {
     return word.split('_').map(str => str[0].toUpperCase() + str.substring(1)).join(' ');
   };
 
 function ToggleSkill(props: ToggleSkillProps) {
+  const [isHovered, setHovering] = useState<boolean>(false);
   let { skill, onChecked, checked } = props;
   let onChange = (_event: ChangeEvent<HTMLInputElement>) => {
     onChecked(skill.id);
@@ -37,20 +38,28 @@ function ToggleSkill(props: ToggleSkillProps) {
   let skill_name = CapitalizeSkill(skill.name);
 
   return (
-    <div className="skill">
-      <div className="ui toggle checkbox">
-        <input
-          type="checkbox"
-          id={skill.name}
-          name={skill.name}
-          onChange={onChange}
-          checked={!!checked}
-        />
-        <label> {skill_name}
-        </label>
-      </div>
-    </div>
-  );
+      <div>
+          <div className="skill">
+              <div className="ui toggle checkbox">
+                  <input
+                      type="checkbox"
+                      id={skill.name}
+                      name={skill.name}
+                      onChange={onChange}
+                      checked={!!checked}
+                  />
+                  <label onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
+                      {skill_name}
+                    </label>
+                </div>
+            </div>
+            <div className="helperText">
+                <Message visible={isHovered} hidden={!isHovered}>
+                    {skill.description}
+                </Message>
+            </div>
+        </div>
+    );
 }
 
 export function SkillsGroup(props: SkillsGroupProps) {

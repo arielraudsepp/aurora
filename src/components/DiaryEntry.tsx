@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import "../App.css";
 import { Skill, getSkills, DiaryEntry, getDiaryEntrySkills, DiaryEntrySkills, retreiveDiaryEntry, updateDiaryEntry } from "../FetchAPI";
 import { SkillsGroup } from "./DisplaySkill";
-import { Accordion, AccordionTitleProps, Button } from "semantic-ui-react";
+import { Accordion, AccordionTitleProps, Button, Grid } from "semantic-ui-react";
 
 type CheckedSkills = {
     [key: number]: boolean;
@@ -110,40 +110,48 @@ function Diary() {
 
     return (
         <div className="App">
-            <Accordion>
-                <SkillsGroup
-                    category={"mindfulness"}
-                    categorized_skills={categorized_skills}
-                    category_index={0}
-                    update_checked={updateChecked}
-                    checkedSkills={checked}
-                    active_index={activeIndex}
-                    handle_click={toggleAccordion}
-                />
-                <SkillsGroup
-                    category={"emotion_regulation"}
-                    categorized_skills={categorized_skills}
-                    category_index={1}
-                    update_checked={updateChecked}
-                    checkedSkills={checked}
-                    active_index={activeIndex}
-                    handle_click={toggleAccordion}
-                />
-                <SkillsGroup
-                    category={"distress_tolerance"}
-                    categorized_skills={categorized_skills}
-                    category_index={2}
-                    update_checked={updateChecked}
-                    checkedSkills={checked}
-                    active_index={activeIndex}
-                    handle_click={toggleAccordion}
-                />
-            </Accordion>
-            <div>
-                <label> Notes</label>
-                <textarea value={notes} onChange={updateNotes} name="notes" />
-            </div>
-            <Button content="Submit" onClick={submitForm} />
+            <Grid columns={2}>
+                <Grid.Row>
+                    <Grid.Column>
+                        <Accordion>
+                            <SkillsGroup
+                                category={"mindfulness"}
+                                categorized_skills={categorized_skills}
+                                category_index={0}
+                                update_checked={updateChecked}
+                                checkedSkills={checked}
+                                active_index={activeIndex}
+                                handle_click={toggleAccordion}
+                            />
+                            <SkillsGroup
+                                category={"emotion_regulation"}
+                                categorized_skills={categorized_skills}
+                                category_index={1}
+                                update_checked={updateChecked}
+                                checkedSkills={checked}
+                                active_index={activeIndex}
+                                handle_click={toggleAccordion}
+                            />
+                            <SkillsGroup
+                                category={"distress_tolerance"}
+                                categorized_skills={categorized_skills}
+                                category_index={2}
+                                update_checked={updateChecked}
+                                checkedSkills={checked}
+                                active_index={activeIndex}
+                                handle_click={toggleAccordion}
+                            />
+                        </Accordion>
+                    </Grid.Column>
+                    <Grid.Column>
+                        <div>
+                            <label> Notes</label>
+                            <textarea rows={7} cols={25} value={notes} onChange={updateNotes} name="notes" placeholder="Enter notes about your day!" />
+                        </div>
+                        <Button content="Submit" onClick={submitForm} />
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
         </div>
     );
 }
