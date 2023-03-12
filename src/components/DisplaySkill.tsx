@@ -1,5 +1,5 @@
-import { ChangeEvent, MouseEvent } from "react";
-import { Accordion, AccordionTitleProps, Icon, Label } from "semantic-ui-react";
+import { useState, ChangeEvent, MouseEvent } from "react";
+import { Accordion, AccordionTitleProps, Icon, Message } from "semantic-ui-react";
 import { Skill } from "../FetchAPI";
 
 interface ToggleSkillProps {
@@ -23,10 +23,6 @@ interface SkillsGroupProps {
     e: MouseEvent<HTMLDivElement>,
     data: AccordionTitleProps
   ) => void;
-  mouse_on: () => void;
-  mouse_off:(
-
-    ) => void;
 }
 
 function CapitalizeSkill(word: string): string {
@@ -34,6 +30,7 @@ function CapitalizeSkill(word: string): string {
   };
 
 function ToggleSkill(props: ToggleSkillProps) {
+  const [isHovered, setHovering] = useState<boolean>(false);
   let { skill, onChecked, checked } = props;
   let onChange = (_event: ChangeEvent<HTMLInputElement>) => {
     onChecked(skill.id);
@@ -41,20 +38,28 @@ function ToggleSkill(props: ToggleSkillProps) {
   let skill_name = CapitalizeSkill(skill.name);
 
   return (
-    <div className="skill">
-      <div className="ui toggle checkbox">
-        <input
-          type="checkbox"
-          id={skill.name}
-          name={skill.name}
-          onChange={onChange}
-          checked={!!checked}
-        />
-        <label> {skill_name}
-        </label>
-      </div>
-    </div>
-  );
+      <div>
+          <div className="skill">
+              <div className="ui toggle checkbox">
+                  <input
+                      type="checkbox"
+                      id={skill.name}
+                      name={skill.name}
+                      onChange={onChange}
+                      checked={!!checked}
+                  />
+                  <label onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
+                      {skill_name}
+                    </label>
+                </div>
+            </div>
+            <div className="helperText">
+                <Message visible={isHovered} hidden={!isHovered}>
+                    {skill.description}
+                </Message>
+            </div>
+        </div>
+    );
 }
 
 export function SkillsGroup(props: SkillsGroupProps) {
@@ -66,8 +71,6 @@ export function SkillsGroup(props: SkillsGroupProps) {
     checkedSkills,
     active_index,
     handle_click,
-    mouse_on,
-    mouse_off,
   } = props;
   let skills_group;
   if (!categorized_skills[category]) {
@@ -96,8 +99,6 @@ export function SkillsGroup(props: SkillsGroupProps) {
         active={active_index === category_index}
         index={category_index}
         onClick={handle_click}
-        onMouseEnter={mouse_on}
-        onMouseLeave={mouse_off}
       >
         <Icon name="dropdown" />
         {CategoryName}
