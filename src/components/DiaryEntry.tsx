@@ -1,8 +1,9 @@
 import React, { useEffect, useState, MouseEvent, ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../App.css";
-import { Skill, getSkills, DiaryEntry, getDiaryEntrySkills, DiaryEntrySkills, retreiveDiaryEntry, updateDiaryEntry } from "../FetchAPI";
+import { Skill, getSkills, DiaryEntry, getDiaryEntrySkills, DiaryEntrySkills, retreiveDiaryEntry, updateDiaryEntry, Rating, DiaryEntryRecord, RatingValue } from "../FetchAPI";
 import { SkillsGroup } from "./DisplaySkill";
+import { SetRating } from "./Rating";
 import { Accordion, AccordionTitleProps, Button, Grid } from "semantic-ui-react";
 
 type CheckedSkills = {
@@ -15,7 +16,7 @@ type CategorizedSkills = {
 
 function Diary() {
     let { entryDate } = useParams<string>();
-
+    const [ratings, setRatings] = useState<Rating[]>([]);
     const [skills, setSkills] = useState<Skill[]>([]);
     const [diaryEntryId, setDiaryEntryId] = useState<number>(0);
     const [notes, setNotes] = useState<string>("");
@@ -26,10 +27,11 @@ function Diary() {
     let date = entryDate!;
 
     useEffect(() => {
-        retreiveDiaryEntry(date).then((value) => {
-            setDiaryEntryId(value.id);
-            setNotes(value.notes);
-        })
+        retreiveDiaryEntry(date).then((result) => {
+            setDiaryEntryId(result.id);
+            setNotes(result.notes);
+            initRatings(result);
+    });
     }, []);
 
     useEffect(() => {
@@ -43,6 +45,24 @@ function Diary() {
     let updateNotes = (event: ChangeEvent<HTMLTextAreaElement>) => {
         setNotes(event.target.value);
     }
+
+    // create initRatings function
+    function initRatings(entry: DiaryEntryRecord) {
+        const ratings: Rating[] = [];
+
+        ratings.push({ name: 'pain', value: RatingValue.Four });
+        ratings.push({ name: 'sadness', value: entry.sadness });
+        ratings.push({ name: 'joy', value: entry.joy });
+        ratings.push({ name: 'shame', value: entry.shame });
+        ratings.push({ name: 'anger', value: entry.anger });
+        ratings.push({ name: 'fear', value: entry.fear });
+        ratings.push({ name: 'drug_use', value: entry.drug_use });
+        ratings.push({ name: 'suicide', value: entry.suicide });
+        ratings.push({ name: 'self_harm', value: entry.self_harm });
+
+        setRatings(ratings);
+    }
+
 
     let categorized_skills = skills.reduce(
         (init: CategorizedSkills, skill: Skill) => {
@@ -95,9 +115,20 @@ function Diary() {
     };
 
     const diaryentry: DiaryEntry = {
-        entry_date: new Date(date),
-        skill_ids: checkSkills,
-        notes: notes,
+        entry_form: {
+            entry_date: new Date(date).toString(),
+            notes: notes,
+            pain: RatingValue.Four,
+            sadness: RatingValue.Four,
+            joy: RatingValue.Four,
+            shame: RatingValue.Four,
+            anger: RatingValue.Four,
+            fear: RatingValue.Four,
+            drug_use: RatingValue.Four,
+            suicide: RatingValue.Four,
+            self_harm: RatingValue.Four
+        },
+        skill_ids: checkSkills
     };
 
     const entry_id = diaryEntryId;
@@ -142,6 +173,19 @@ function Diary() {
                                 handle_click={toggleAccordion}
                             />
                         </Accordion>
+                        <div>
+                            <Grid>
+                                {ratings.map((rating) => (
+                                    <div key={rating.name}>
+                                        <SetRating
+                                            name={rating.name}
+                                            value={rating.value}
+                                        />
+                                    </div>
+
+                                ))}
+                            </Grid>
+                        </div>
                     </Grid.Column>
                     <Grid.Column>
                         <div>
@@ -152,7 +196,7 @@ function Diary() {
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
-        </div>
+        </div >
     );
 }
 

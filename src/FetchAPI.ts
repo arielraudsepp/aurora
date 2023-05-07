@@ -1,3 +1,17 @@
+export enum RatingValue {
+    Zero = "Zero",
+    One = "One",
+    Two = "Two",
+    Three = "Three",
+    Four = "Four",
+    Five = "Five",
+}
+
+export interface Rating {
+    name: string;
+    value: RatingValue;
+}
+
 export interface Skill {
     id: number;
     name: string;
@@ -6,9 +20,20 @@ export interface Skill {
 };
 
 export interface DiaryEntry {
-    entry_date: Date;
+    entry_form: {
+        entry_date: string;
+        notes: string;
+        pain: RatingValue;
+        sadness: RatingValue;
+        joy: RatingValue;
+        shame: RatingValue;
+        anger: RatingValue;
+        fear: RatingValue;
+        drug_use: RatingValue;
+        suicide: RatingValue;
+        self_harm: RatingValue;
+    },
     skill_ids: number[];
-    notes: string;
 };
 
 export interface DiaryEntrySkills {
@@ -23,6 +48,15 @@ export interface DiaryEntryRecord {
     created_at: Date;
     updated_at: Date;
     notes: string;
+    pain: RatingValue;
+    sadness: RatingValue;
+    joy: RatingValue;
+    shame: RatingValue;
+    anger: RatingValue;
+    fear: RatingValue;
+    drug_use: RatingValue;
+    suicide: RatingValue;
+    self_harm: RatingValue;
 };
 
 
@@ -119,14 +153,26 @@ export async function retreiveDiaryEntry(date: string): Promise<DiaryEntryRecord
     if (response.status === 404) {
         let entry = await submitDiaryEntry(
             {
-                "entry_date": new Date(date),
-                "skill_ids": [],
-                "notes": '',
+                "entry_form": {
+                    "entry_date": date,
+                    "notes": '',
+                    "pain": RatingValue.Zero,
+                    "sadness": RatingValue.Zero,
+                    "joy": RatingValue.Zero,
+                    "shame": RatingValue.Zero,
+                    "anger": RatingValue.Zero,
+                    "fear": RatingValue.Zero,
+                    "drug_use": RatingValue.Zero,
+                    "suicide": RatingValue.Zero,
+                    "self_harm": RatingValue.Zero
+                },
+                "skill_ids": []
             }
         )
         value = entry;
     } else {
         value = response.json();
     }
+    console.log(value);
     return value;
 }
