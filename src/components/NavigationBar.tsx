@@ -1,10 +1,9 @@
 import logo from "../rustacean.svg";
-import { BsFillCalendarPlusFill } from "react-icons/bs";
+import calendar from "../calendar.png";
 import { Button, Image, Menu } from "semantic-ui-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getName } from "../FetchAPI";
-
 
 function Unauthenticated() {
     let navigate = useNavigate();
@@ -27,6 +26,10 @@ function Authenticated() {
         navigate("");
     };
 
+    const navigateCalendar = () => {
+        navigate("/calendar");
+    };
+
     useEffect(() => {
         getName().then(setName);
     }, []);
@@ -34,7 +37,10 @@ function Authenticated() {
     return (
         <Menu.Item position='right'>
             <Menu.Item>
-                <h3>{name} </h3>
+                <h3>Welcome {name} </h3>
+            </Menu.Item>
+            <Menu.Item as='a' header onClick={navigateCalendar}>
+                <Image src={calendar} alt='' width="50" height="50" style={{ marginRight: '0.5em' }} />
             </Menu.Item>
             <Button primary={true} style={{ marginLeft: '1.0em' }} onClick={navigateHome} content="Log Out" />
         </Menu.Item>

@@ -4,7 +4,7 @@ import "../App.css";
 import { Skill, getSkills, DiaryEntry, getDiaryEntrySkills, DiaryEntrySkills, retreiveDiaryEntry, updateDiaryEntry, Rating, DiaryEntryRecord, RatingValue } from "../FetchAPI";
 import { SkillsGroup } from "./DisplaySkill";
 import { SetRating } from "./Rating";
-import { Accordion, AccordionTitleProps, Button, Grid } from "semantic-ui-react";
+import { Accordion, AccordionTitleProps, Button, Grid, GridColumn, Header } from "semantic-ui-react";
 
 type CheckedSkills = {
     [key: number]: boolean;
@@ -31,7 +31,7 @@ function Diary() {
             setDiaryEntryId(result.id);
             setNotes(result.notes);
             initRatings(result);
-    });
+        });
     }, []);
 
     useEffect(() => {
@@ -50,7 +50,7 @@ function Diary() {
     function initRatings(entry: DiaryEntryRecord) {
         const ratings: Rating[] = [];
 
-        ratings.push({ name: 'pain', value: RatingValue.Four });
+        ratings.push({ name: 'pain', value: entry.pain });
         ratings.push({ name: 'sadness', value: entry.sadness });
         ratings.push({ name: 'joy', value: entry.joy });
         ratings.push({ name: 'shame', value: entry.shame });
@@ -113,88 +113,111 @@ function Diary() {
         const newIndex: number = activeIndex === index ? -1 : index;
         setActiveIndex(newIndex);
     };
-
-    const diaryentry: DiaryEntry = {
+    function getDiaryEntry() {
+        let pain = ratings.find((rating) => rating.name === "pain")!.value;
+        let sadness = ratings.find((rating) => rating.name === "sadness")!.value;
+        let joy = ratings.find((rating) => rating.name === "joy")!.value;
+        let shame = ratings.find((rating) => rating.name === "shame")!.value;
+        let anger = ratings.find((rating) => rating.name === "anger")!.value;
+        let fear = ratings.find((rating) => rating.name === "fear")!.value;
+        let drug_use = ratings.find((rating) => rating.name === "drug_use")!.value;
+        let suicide = ratings.find((rating) => rating.name === "suicide")!.value;
+        let self_harm = ratings.find((rating) => rating.name === "self_harm")!.value;
+      const diaryentry: DiaryEntry = {
         entry_form: {
-            entry_date: new Date(date).toString(),
-            notes: notes,
-            pain: RatingValue.Four,
-            sadness: RatingValue.Four,
-            joy: RatingValue.Four,
-            shame: RatingValue.Four,
-            anger: RatingValue.Four,
-            fear: RatingValue.Four,
-            drug_use: RatingValue.Four,
-            suicide: RatingValue.Four,
-            self_harm: RatingValue.Four
-        },
-        skill_ids: checkSkills
-    };
+                entry_date: date,
+                notes: notes,
+                pain: pain,
+                sadness: sadness,
+                joy: joy,
+                shame: shame,
+                anger: anger,
+                fear: fear,
+                drug_use: drug_use,
+                suicide: suicide,
+                self_harm: self_harm
+            },
+            skill_ids: checkSkills
+        };
+
+        return diaryentry;
+    }
+
 
     const entry_id = diaryEntryId;
 
     let submitForm = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        updateDiaryEntry(entry_id, diaryentry);
+        updateDiaryEntry(entry_id, getDiaryEntry());
         navigate("/calendar");
     };
 
     return (
         <div className="App">
-            <Grid columns={2}>
-                <Grid.Row>
-                    <Grid.Column>
-                        <Accordion>
-                            <SkillsGroup
-                                category={"mindfulness"}
-                                categorized_skills={categorized_skills}
-                                category_index={0}
-                                update_checked={updateChecked}
-                                checkedSkills={checked}
-                                active_index={activeIndex}
-                                handle_click={toggleAccordion}
-                            />
-                            <SkillsGroup
-                                category={"emotion_regulation"}
-                                categorized_skills={categorized_skills}
-                                category_index={1}
-                                update_checked={updateChecked}
-                                checkedSkills={checked}
-                                active_index={activeIndex}
-                                handle_click={toggleAccordion}
-                            />
-                            <SkillsGroup
-                                category={"distress_tolerance"}
-                                categorized_skills={categorized_skills}
-                                category_index={2}
-                                update_checked={updateChecked}
-                                checkedSkills={checked}
-                                active_index={activeIndex}
-                                handle_click={toggleAccordion}
-                            />
-                        </Accordion>
-                        <div>
-                            <Grid>
-                                {ratings.map((rating) => (
-                                    <div key={rating.name}>
-                                        <SetRating
-                                            name={rating.name}
-                                            value={rating.value}
-                                        />
-                                    </div>
-
-                                ))}
-                            </Grid>
-                        </div>
-                    </Grid.Column>
-                    <Grid.Column>
-                        <div>
-                            <label> Notes</label>
-                            <textarea rows={7} cols={25} value={notes} onChange={updateNotes} name="notes" placeholder="Enter notes about your day!" />
-                        </div>
-                        <Button content="Submit" onClick={submitForm} />
-                    </Grid.Column>
-                </Grid.Row>
+            <Grid centered columns={3}>
+                <Grid.Column>
+                    <Header as='h1'>Skills</Header>
+                    <Header.Subheader>
+                        Check off each skill you used
+                    </Header.Subheader>
+                    <Accordion>
+                        <SkillsGroup
+                            category={"mindfulness"}
+                            categorized_skills={categorized_skills}
+                            category_index={0}
+                            update_checked={updateChecked}
+                            checkedSkills={checked}
+                            active_index={activeIndex}
+                            handle_click={toggleAccordion}
+                        />
+                        <SkillsGroup
+                            category={"emotion_regulation"}
+                            categorized_skills={categorized_skills}
+                            category_index={1}
+                            update_checked={updateChecked}
+                            checkedSkills={checked}
+                            active_index={activeIndex}
+                            handle_click={toggleAccordion}
+                        />
+                        <SkillsGroup
+                            category={"distress_tolerance"}
+                            categorized_skills={categorized_skills}
+                            category_index={2}
+                            update_checked={updateChecked}
+                            checkedSkills={checked}
+                            active_index={activeIndex}
+                            handle_click={toggleAccordion}
+                        />
+                    </Accordion>
+                </Grid.Column>
+                <Grid.Column>
+                    <Header as='h1'>Ratings</Header>
+                    <Header.Subheader>
+                        Rate each emotion or urge (0-5)
+                    </Header.Subheader>
+                    <Grid columns={3}>
+                        {ratings.map((rating) => (
+                            <Grid.Column key={rating.name}>
+                                <div>
+                                    <SetRating
+                                        name={rating.name}
+                                        val={rating.value}
+                                    />
+                                </div>
+                            </Grid.Column>
+                        ))}
+                    </Grid>
+                </Grid.Column>
+                <Grid.Column>
+                    <div>
+                        <Header as='h1'>Notes</Header>
+                        <textarea rows={7} cols={25} value={notes} onChange={updateNotes} name="notes" placeholder="Enter notes about your day!" />
+                    </div>
+                    <Grid.Row>
+                        <Button content="Cancel" onClick={() => navigate("/calendar")} />
+                        <Button primary={true} content="Submit" onClick={submitForm} />
+                    </Grid.Row>
+                </Grid.Column>
             </Grid>
         </div >
     );

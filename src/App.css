@@ -61,6 +61,11 @@ td {
 input,
 label {
   display: block;
+  padding: 10px;
+}
+
+.ui-label {
+  padding-top: 10px;
 }
 
 .calendar {

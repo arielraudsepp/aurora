@@ -1,11 +1,11 @@
-import React from "react";
+import { useState } from "react";
 import { RatingValue } from "../FetchAPI";
 import { Slider } from "react-semantic-ui-range";
-import { Grid, Label } from "semantic-ui-react";
+import { Grid, Input, Label } from "semantic-ui-react";
 
 interface RatingProps {
     name: string;
-    value: RatingValue;
+    val: RatingValue;
 }
 
 const NumToEnum: Record<number, RatingValue> = {
@@ -17,7 +17,7 @@ const NumToEnum: Record<number, RatingValue> = {
     5: RatingValue.Five
 }
 
-const EnumToNum: Record<RatingValue, number> = {
+const EnumToNum: Record<RatingValue, number> ={
     [RatingValue.Zero]: 0,
     [RatingValue.One]: 1,
     [RatingValue.Two]: 2,
@@ -27,29 +27,34 @@ const EnumToNum: Record<RatingValue, number> = {
 }
 
 export function SetRating(props: RatingProps) {
-    let { name, value } = props;
-
-    const [ val, setVal ] = React.useState<number>(EnumToNum[value]);
+    let { name, val } = props;
+    const [ value, setValue ] = useState<number>(EnumToNum[val]);
 
     const settings = {
-        start: 3,
+        start: val,
         min: 0,
         max: 5,
         step: 1,
-        onChange: (num: number) => {
-            setVal(num);
+        onChange: (value: number) => {
+            setValue(value);
+            val = NumToEnum[value];
         }
-    };
+    }
 
     return (
-        <Grid>
-        <Grid.Row>
-            <Grid.Column width={4}>
-                <label>{name}</label>
-                <Slider value={value} color="blue" settings={settings} />
-                <Label color="blue">{val}</Label>
-            </Grid.Column>
-        </Grid.Row>
-        </Grid>
+        <div>
+            <label>{name}</label>
+            <Grid>
+                <Grid.Column width={12}>
+                    <Slider
+                        value={value}
+                        color="blue"
+                        inverted={false}
+                        settings={settings}
+                    />
+                    <Label color="blue">{value}</Label>
+                </Grid.Column>
+            </Grid>
+        </div>
     )
 }

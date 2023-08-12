@@ -47,10 +47,10 @@ function Login() {
                     <Form.Input label='Password' type='password' name='password' width={6} value={form.password} onChange={onUpdateField} required />
                 </Form.Group>
                 <Form.Button>Login</Form.Button>
-                {loginError &&
-                    <Message error header='Invalid login credentials' content='Please try again' />
-                }
             </Form>
+            {loginError &&
+                <Message error header='Invalid login credentials' content='Please try again' />
+            }
             {connectionError &&
                 <Message error header='Network connection error' content='Please try again later' />
             }
