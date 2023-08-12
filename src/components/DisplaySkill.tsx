@@ -33,7 +33,7 @@ const messageStyle = {
 
 function CapitalizeSkill(word: string): string {
     return word.split('_').map(str => str[0].toUpperCase() + str.substring(1)).join(' ');
-  };
+};
 
 function ToggleSkill(props: ToggleSkillProps) {
   const [isHovered, setHovering] = useState<boolean>(false);

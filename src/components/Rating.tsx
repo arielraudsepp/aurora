@@ -26,6 +26,10 @@ const EnumToNum: Record<RatingValue, number> ={
     [RatingValue.Five]: 5
 }
 
+function CapitalizeRating(word: string): string {
+    return word.split('_').map(str => str[0].toUpperCase() + str.substring(1)).join(' ');
+};
+
 export function SetRating(props: RatingProps) {
     let { name, val } = props;
     const [ value, setValue ] = useState<number>(EnumToNum[val]);
@@ -41,9 +45,11 @@ export function SetRating(props: RatingProps) {
         }
     }
 
+    let rating_name = CapitalizeRating(name);
+
     return (
         <div>
-            <label>{name}</label>
+            <label>{rating_name}</label>
             <Grid>
                 <Grid.Column width={12}>
                     <Slider
