@@ -1,2 +1,2 @@
-Front-end for shooting star
+Front-end for shooting star built in React
  
