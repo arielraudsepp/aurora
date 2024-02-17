@@ -14,10 +14,6 @@
   pointer-events: none;
 }
 
-p {
-  margin: 0;
-}
-
 .App-header {
   background-color: white;
   min-height: 100vh;
@@ -46,6 +42,23 @@ p {
   color: #61dafb;
 }
 
+.header {
+  fontSize: 4em;
+  fontWeight: normal;
+  marginBottom: 0;
+  marginTop: 2em;
+}
+
+.sub-header {
+  fontSize: 1.7em;
+  fontWeight: normal;
+  marginTop: 1.5em;
+}
+
+.minor-header {
+
+}
+
 table {
   border: 2px solid black;
 }
@@ -58,6 +71,11 @@ td {
   text-align: center;
 }
 
+p {
+  margin: 0;
+  fontSize: 1.33em;
+}
+
 input,
 label {
   display: block;
@@ -68,12 +86,16 @@ label {
   padding-top: 10px;
 }
 
-.calendar {
-  background-color: green;
-}
-
 .helperText {
   position: absolute;
   top: 0px;
   right: 0px;
+}
+
+.centered-container {
+    text-align: center;
+}
+
+.centered-content {
+    display: inline-block;
 }

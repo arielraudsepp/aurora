@@ -25,12 +25,6 @@ interface SkillsGroupProps {
   ) => void;
 }
 
-const messageStyle = {
-  position: 'absolute',
-  right: 0,
-  top: 0
-}
-
 function CapitalizeSkill(word: string): string {
     return word.split('_').map(str => str[0].toUpperCase() + str.substring(1)).join(' ');
 };

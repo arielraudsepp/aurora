@@ -5,6 +5,7 @@ import "../Calendar.css";
 import { getDate } from "../Date";
 import '../App.css';
 import { DiaryEntryRecord, getUpdatedEntries } from "../FetchAPI";
+import { Grid } from "semantic-ui-react";
 
 const dates = ['2022-09-03', '2022-09-04'];
 
@@ -40,10 +41,12 @@ function CalendarPage() {
     };
 
     return (
-        <>
+        <Grid centered columns={1}>
+            <div>
             <h3>Select a date to add or view a diary entry</h3>
             <Calendar onChange={onChange} value={value} onClickDay={handleClickedDay} tileClassName={changeBackground} />
-        </>
+        </div>
+        </Grid>
     );
 };
 
