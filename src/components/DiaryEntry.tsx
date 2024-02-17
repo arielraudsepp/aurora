@@ -191,24 +191,6 @@ function Diary() {
                     </Accordion>
                 </Grid.Column>
                 <Grid.Column>
-                    <Header as='h1'>Ratings</Header>
-                    <Header.Subheader>
-                        Rate each emotion or urge (0-5)
-                    </Header.Subheader>
-                    <Grid columns={3}>
-                        {ratings.map((rating) => (
-                            <Grid.Column key={rating.name}>
-                                <div>
-                                    <SetRating
-                                        name={rating.name}
-                                        val={rating.value}
-                                    />
-                                </div>
-                            </Grid.Column>
-                        ))}
-                    </Grid>
-                </Grid.Column>
-                <Grid.Column>
                     <div>
                         <Header as='h1'>Notes</Header>
                         <textarea rows={7} cols={25} value={notes} onChange={updateNotes} name="notes" placeholder="Enter notes about your day!" />
