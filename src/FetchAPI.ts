@@ -131,7 +131,7 @@ export async function login(loginData: string): Promise<Response> {
     return response;
 }
 
-export async function signup(signupData: string) {
+export async function register(signupData: string) {
     const response = await fetch('http://localhost:8000/signup', {
         method: 'POST',
         headers: {

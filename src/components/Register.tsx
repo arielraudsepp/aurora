@@ -3,10 +3,10 @@ import { Stack } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { signup } from "../FetchAPI";
+import { register } from "../FetchAPI";
 
 
-function Signup() {
+function Register() {
     const navigate = useNavigate();
     const handleLogin = () => navigate("/login");
 
@@ -33,7 +33,7 @@ function Signup() {
                 .required('Password is required')
         }),
         onSubmit: async (values, helpers) => {
-            signup(JSON.stringify(values)).then((response_status) => {
+            register(JSON.stringify(values)).then((response_status) => {
                 if (response_status === 200) {
                     navigate("/login");
                 }
@@ -143,4 +143,4 @@ function Signup() {
     )
 }
 
-export default Signup;
+export default Register;

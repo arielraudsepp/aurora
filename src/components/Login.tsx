@@ -7,7 +7,7 @@ import { login } from "../FetchAPI";
 
 function Login() {
     const navigate = useNavigate();
-    const handleSignup = () => navigate("/signup");
+    const handleRegister = () => navigate("/register");
 
 
     const formik = useFormik({
@@ -75,7 +75,7 @@ function Login() {
                                 Don't have an account?
                                 &nbsp;
                                 <Link
-                                    onClick={handleSignup}
+                                    onClick={handleRegister}
                                     component="button"
                                     underline="hover"
                                     variant="subtitle2"

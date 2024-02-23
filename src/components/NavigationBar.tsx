@@ -8,11 +8,11 @@ import { getName } from "../FetchAPI";
 function Unauthenticated() {
     let navigate = useNavigate();
     const navigateLogin = () => navigate("/login");
-    const navigateSignup = () => navigate("/signup");
+    const navigateRegister = () => navigate("/register");
     return (
         <Menu.Item position='right'>
             <Button primary={true} onClick={navigateLogin} content="Log In" />
-            <Button primary={true} style={{ marginLeft: '0.5em' }} onClick={navigateSignup} content="Sign Up" />
+            <Button primary={true} style={{ marginLeft: '0.5em' }} onClick={navigateRegister} content="Sign Up" />
         </Menu.Item>
     );
 }
