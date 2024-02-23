@@ -42,6 +42,25 @@
   color: #61dafb;
 }
 
+.App-home {
+  align-items: center;
+  background: #000b3b;
+  color: white;
+  display: flex;
+  justify-content: center,
+  '& img': {
+    maxWidth: '100%'
+  }
+}
+
+.App-auth {
+  backgroundColor: background.paper;
+  flex: '1 1 auto';
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
 .header {
   fontSize: 4em;
   fontWeight: normal;

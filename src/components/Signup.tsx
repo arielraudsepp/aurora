@@ -1,92 +1,146 @@
-import { FormEvent, useState } from "react";
+import { Typography, Link, Box, TextField, Button } from "@mui/material";
+import { Stack } from "@mui/system";
 import { useNavigate } from "react-router-dom";
-import { Form, Message, Button } from "semantic-ui-react";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import { signup } from "../FetchAPI";
 
 
 function Signup() {
-    const [form, setForm] = useState({ email: '', name: '', password: '' });
-    const [isSubmitted, setSubmitted] = useState<boolean>(false);
-    const [isError, setError] = useState<boolean>(false);
-    const [isInvalidEmail, setInvalidEmail] = useState<boolean>(false);
-    const [isInvalidPassword, setInvalidPassword] = useState<boolean>(false);
+    const navigate = useNavigate();
+    const handleLogin = () => navigate("/login");
 
-    function onUpdateField(e: FormEvent<HTMLInputElement>) {
-        const nextFormState = {
-            ...form,
-            [e.currentTarget.name]: e.currentTarget.value,
-        };
-        setError(false);
-        setInvalidEmail(false);
-        setInvalidPassword(false);
-        setForm(nextFormState);
-    };
-
-    let handleSubmit = () => {
-        validateField({ currentTarget: { name: 'email', value: form.email } } as FormEvent<HTMLInputElement>);
-        validateField({ currentTarget: { name: 'password', value: form.password } } as FormEvent<HTMLInputElement>);
-        if (isInvalidEmail || isInvalidPassword) {
-            return;
+    const formik = useFormik({
+        initialValues: {
+            name: null,
+            email: null,
+            password: null,
+            submit: null
+        },
+        validationSchema: Yup.object({
+            name: Yup
+                .string()
+                .max(255)
+                .required('Name is required'),
+            email: Yup
+                .string()
+                .email('Must be a valid email')
+                .max(255)
+                .required('Email is required'),
+            password: Yup
+                .string()
+                .max(255)
+                .required('Password is required')
+        }),
+        onSubmit: async (values, helpers) => {
+            signup(JSON.stringify(values)).then((response_status) => {
+                if (response_status === 200) {
+                    navigate("/login");
+                }
+            })
+                .catch((error) => {
+                    helpers.setStatus({ success: false });
+                    helpers.setErrors({ submit: error.message });
+                    helpers.setSubmitting(false);
+                });
         }
-        signup(JSON.stringify(form)).then((response_status) => {
-            if (response_status === 200) {
-                setSubmitted(true);
-            } else if (response_status === 500) {
-                setError(true);
-            } else {
-                setInvalidEmail(true);
-            }
-        }
-        )
-    };
+    });
 
-    function validateField(e: FormEvent<HTMLInputElement>) {
-        if (e.currentTarget.name === 'email') {
-            if (e.currentTarget.value.includes('@')) {
-                setInvalidEmail(false);
-            } else {
-                setInvalidEmail(true);
-            }
-        } else if (e.currentTarget.name === 'password') {
-            if (e.currentTarget.value.length < 8) {
-                setInvalidPassword(true);
-            } else {
-                setInvalidPassword(false);
-            }
-        }
-    }
-
-    let navigate = useNavigate();
-
-    let handleClick = () => navigate("/login");
     return (
         <>
-            <Form onSubmit={handleSubmit}>
-                <h2>Sign Up!</h2>
-                <Form.Group>
-                    <Form.Input label='Email' name='email' value={form.email} width={6} onChange={onUpdateField} error={isInvalidEmail} requried/>
-                    <Form.Input label='Name' name='name' value={form.name} width={6} onChange={onUpdateField} required />
-                    <Form.Input label='Password' type='password' name='password' width={6} value={form.password} onChange={onUpdateField} error={isInvalidPassword} required />
-                </Form.Group>
-                <Form.Button>Submit</Form.Button>
-            </Form>
-            {isError ?
-                <Message error header='Email has already been used to register' content='Please enter a new email' />
-                : <></>}
-            {isInvalidEmail ?
-                <Message error header='Email is not valid' content='Please enter a valid email address' />
-                : <></>}
-            {isInvalidPassword ?
-                <Message error header='Password is not valid' content='Password must be at least 8 characters long' />
-                : <></>}
-            {isSubmitted ?
-                <>
-                    <Message success header='Success!' content='Created a new user' />
-                    <Button onClick={handleClick} content="Go to Log In" />
-                </>
-                : <></>}
+            <Box className="App-auth">
+                <Box
+                    sx={{
+                        maxWidth: 550,
+                        px: 3,
+                        py: '100px',
+                        width: '100%'
+                    }}
+                >
+                    <div>
+                        <Stack
+                            spacing={1}
+                            sx={{ mb: 3 }}
+                        >
+                            <Typography variant="h4">
+                                Register
+                            </Typography>
+                            <Typography
+                                color="text.secondary"
+                                variant="body2"
+                            >
+                                Already have an account?
+                                &nbsp;
+                                <Link
+                                    onClick={handleLogin}
+                                    component="button"
+                                    underline="hover"
+                                    variant="subtitle2"
+                                >
+                                    Log in
+                                </Link>
+                            </Typography>
+                        </Stack>
+                        <form onSubmit={formik.handleSubmit}>
+                            <Stack spacing={3}>
+                                <TextField
+                                    error={!!(formik.touched.name && formik.errors.name)}
+                                    fullWidth
+                                    helperText={formik.touched.name && formik.errors.name}
+                                    label="Name"
+                                    name="name"
+                                    onBlur={formik.handleBlur}
+                                    onChange={formik.handleChange}
+                                    type="name"
+                                    value={formik.values.name}
+                                />
+                                <TextField
+                                    error={!!(formik.touched.email && formik.errors.email)}
+                                    fullWidth
+                                    helperText={formik.touched.email && formik.errors.email}
+                                    label="Email Address"
+                                    name="email"
+                                    onBlur={formik.handleBlur}
+                                    onChange={formik.handleChange}
+                                    type="email"
+                                    value={formik.values.email}
+                                />
+                                <TextField
+                                    error={!!(formik.touched.password && formik.errors.password)}
+                                    fullWidth
+                                    helperText={formik.touched.password && formik.errors.password}
+                                    label="Password"
+                                    name="password"
+                                    onBlur={formik.handleBlur}
+                                    onChange={formik.handleChange}
+                                    type="password"
+                                    value={formik.values.password}
+                                />
+                            </Stack>
+                            {formik.errors.submit && (
+                                <Typography
+                                    color="error"
+                                    sx={{ mt: 3 }}
+                                    variant="body2"
+                                >
+                                    {formik.errors.submit}
+                                </Typography>
+                            )}
+                            <Button
+                                fullWidth
+                                size="large"
+                                sx={{ mt: 3 }}
+                                type="submit"
+                                variant="contained"
+                            >
+                                Continue
+                            </Button>
+                        </form>
+                    </div>
+                </Box>
+            </Box>
         </>
-    );
+    )
 }
 
 export default Signup;
