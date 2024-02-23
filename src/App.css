@@ -1,10 +1,3 @@
-.App {
-  text-align: left;
-  padding-left: 10px;
-  padding: 10px;
-  font-size: 20px;
-}
-
 .skill > .toggle {
   padding: 5px 0px;
 }
@@ -74,8 +67,11 @@
   marginTop: 1.5em;
 }
 
-.minor-header {
-
+.citation {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 5vw;
 }
 
 table {

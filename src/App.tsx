@@ -9,7 +9,6 @@ import DiaryEntry from "./components/DiaryEntry";
 import Chart from "./Chart";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Home from "./components/Home";
 import { NavigationBar } from "./components/NavigationBar";
 
 function RequireAuth() {
@@ -29,7 +28,7 @@ function App() {
         <div className="App">
             <NavigationBar />
             <Routes>
-                <Route path="/" element={<Home />} />
+
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register/>} />
                 <Route element={<RequireAuth />}>

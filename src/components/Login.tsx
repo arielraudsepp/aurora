@@ -1,11 +1,12 @@
-import { Typography, Link, Box, TextField, Button } from "@mui/material";
+import { Typography, Link, Box, TextField, Button, Grid } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { login } from "../FetchAPI";
+import { Info } from "./Info";
 
-function Login() {
+const Login = () => {
     const navigate = useNavigate();
     const handleRegister = () => navigate("/register");
 
@@ -50,88 +51,122 @@ function Login() {
     });
 
     return (
-        <>
-            <Box className="App-auth">
-                <Box
+        <Box
+            component="main"
+            sx={{
+                display: 'flex',
+                flex: '1 1 auto'
+            }}
+        >
+            <Grid
+                container
+                sx={{ flex: '1 1 auto' }}
+            >
+                <Grid
+                    xs={12}
+                    lg={6}
                     sx={{
-                        maxWidth: 550,
-                        px: 3,
-                        py: '100px',
-                        width: '100%'
+                        backgroundColor: 'background.paper',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        position: 'relative'
                     }}
                 >
-                    <div>
-                        <Stack
-                            spacing={1}
-                            sx={{ mb: 3 }}
+                    <Box className="App-auth">
+                        <Box
+                            sx={{
+                                maxWidth: 550,
+                                px: 3,
+                                py: '100px',
+                                width: '100%'
+                            }}
                         >
-                            <Typography variant="h4">
-                                Login
-                            </Typography>
-                            <Typography
-                                color="text.secondary"
-                                variant="body2"
-                            >
-                                Don't have an account?
-                                &nbsp;
-                                <Link
-                                    onClick={handleRegister}
-                                    component="button"
-                                    underline="hover"
-                                    variant="subtitle2"
+                            <div>
+                                <Stack
+                                    spacing={1}
+                                    sx={{ mb: 3 }}
                                 >
-                                    Register
-                                </Link>
-                            </Typography>
-                        </Stack>
-                        <form onSubmit={formik.handleSubmit}>
-                            <Stack spacing={3}>
-                                <TextField
-                                    error={!!(formik.touched.email && formik.errors.email)}
-                                    fullWidth
-                                    helperText={formik.touched.email && formik.errors.email}
-                                    label="Email Address"
-                                    name="email"
-                                    onBlur={formik.handleBlur}
-                                    onChange={formik.handleChange}
-                                    type="email"
-                                    value={formik.values.email}
-                                />
-                                <TextField
-                                    error={!!(formik.touched.password && formik.errors.password)}
-                                    fullWidth
-                                    helperText={formik.touched.password && formik.errors.password}
-                                    label="Password"
-                                    name="password"
-                                    onBlur={formik.handleBlur}
-                                    onChange={formik.handleChange}
-                                    type="password"
-                                    value={formik.values.password}
-                                />
-                            </Stack>
-                            {formik.errors.submit && (
-                                <Typography
-                                    color="error"
-                                    sx={{ mt: 3 }}
-                                    variant="body2"
-                                >
-                                    {formik.errors.submit}
-                                </Typography>
-                            )}
-                            <Button
-                                fullWidth
-                                size="large"
-                                sx={{ mt: 3 }}
-                                type="submit"
-                                variant="contained"
-                            >
-                                Continue
-                            </Button>
-                        </form>
-                    </div>
-                </Box>
-            </Box>
-        </>
+                                    <Typography variant="h4">
+                                        Login
+                                    </Typography>
+                                    <Typography
+                                        color="text.secondary"
+                                        variant="body2"
+                                    >
+                                        Don't have an account?
+                                        &nbsp;
+                                        <Link
+                                            onClick={handleRegister}
+                                            component="button"
+                                            underline="hover"
+                                            variant="subtitle2"
+                                        >
+                                            Register
+                                        </Link>
+                                    </Typography>
+                                </Stack>
+                                <form onSubmit={formik.handleSubmit}>
+                                    <Stack spacing={3}>
+                                        <TextField
+                                            error={!!(formik.touched.email && formik.errors.email)}
+                                            fullWidth
+                                            helperText={formik.touched.email && formik.errors.email}
+                                            label="Email Address"
+                                            name="email"
+                                            onBlur={formik.handleBlur}
+                                            onChange={formik.handleChange}
+                                            type="email"
+                                            value={formik.values.email}
+                                        />
+                                        <TextField
+                                            error={!!(formik.touched.password && formik.errors.password)}
+                                            fullWidth
+                                            helperText={formik.touched.password && formik.errors.password}
+                                            label="Password"
+                                            name="password"
+                                            onBlur={formik.handleBlur}
+                                            onChange={formik.handleChange}
+                                            type="password"
+                                            value={formik.values.password}
+                                        />
+                                    </Stack>
+                                    {formik.errors.submit && (
+                                        <Typography
+                                            color="error"
+                                            sx={{ mt: 3 }}
+                                            variant="body2"
+                                        >
+                                            {formik.errors.submit}
+                                        </Typography>
+                                    )}
+                                    <Button
+                                        fullWidth
+                                        size="large"
+                                        sx={{ mt: 3 }}
+                                        type="submit"
+                                        variant="contained"
+                                    >
+                                        Continue
+                                    </Button>
+                                </form>
+                            </div>
+                        </Box>
+                    </Box>
+                </Grid>
+                <Grid
+                    xs={12}
+                    lg={6}
+                    sx={{
+                        backgroundColor: 'background.paper',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        position: 'relative'
+                    }}
+                >
+                    <Info/>
+                </Grid>
+            </Grid>
+        </Box>
     )
 }
 
